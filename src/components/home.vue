@@ -1,12 +1,12 @@
 <template>
-    <div id="app">
-        <router-view></router-view>
+    <div id="home">
+        <h1>Addlink company</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'app'
+    name: 'home'
 }
 </script>
 
