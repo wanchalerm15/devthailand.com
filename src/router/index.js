@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Url from './url'
+import Url from '../url.json';
+
 Vue.use(VueRouter);
 
 import Home from '../components/home.vue';

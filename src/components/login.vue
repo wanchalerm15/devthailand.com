@@ -1,5 +1,7 @@
 <template>
     <div id="login" class="wrapper">
+    
+        <!--Login form-->
         <form v-on:submit.prevent="onLogin()" v-if="countUser > 0">
             <div class="group">
                 <h3>เข้าสู่ระบบ</h3>
@@ -22,6 +24,7 @@
             </div>
         </form>
     
+        <!--Register form-->
         <form v-on:submit.prevent="onRegister()" v-if="countUser == 0">
             <div class="group">
                 <h3>สร้างบัญชีก่อนเข้าสู่ระบบ</h3>
@@ -92,10 +95,10 @@ export default {
     methods: {
         onRegister() {
             this.$validator.validateAll().then(valid => {
-                // if (!valid) return;
+                if (!valid) return;
                 http.requestPost('register', this.register)
                     .then(res => {
-                        console.log(res);
+                        this.$store.dispatch('countUser');
                     })
                     .catch(res => {
                         this.error_message = res.data.message;
@@ -103,7 +106,9 @@ export default {
             });
         },
         onLogin() {
-
+            this.$validator.validateAll().then(valid => {
+                console.log(valid);
+            });
         }
     }
 }
