@@ -6,9 +6,9 @@ mongoose.Promise = global.Promise;
 
 // Begin    For User Collection
 const userSchema = mongoose.Schema({
-    username: { type: String },
-    password: { type: String },
-    name: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    name: { type: String, required: true },
     created: { type: Date },
     updated: { type: Date }
 });

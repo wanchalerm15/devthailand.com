@@ -18,7 +18,10 @@
     
             <div class="group">
                 <label for="">ชื่อผู้ใช้งาน :</label>
-                <input type="text" v-model="register.username">
+                <input type="text" v-model="register.email" v-validate="'required|email'" name="email">
+                <span class="error">
+                    {{ errors.first('email') }}
+                </span>
             </div>
     
             <div class="group">
@@ -27,7 +30,7 @@
             </div>
     
             <div class="group">
-                <button class="button">บันทึกข้อมูล</button>
+                <button class="button" :disabled="errors.errors.length > 0">บันทึกข้อมูล</button>
             </div>
         </form>
     </div>
@@ -41,7 +44,7 @@ export default {
     data() {
         return {
             register: {
-                username: null,
+                email: null,
                 password: null,
                 name: null
             }
@@ -57,8 +60,11 @@ export default {
     },
     methods: {
         onRegister() {
-            http.requestPost('register', this.register)
-                .then(res => console.log(res));
+            this.$validator.validateAll().then(valid => {
+                console.log(valid);
+            });
+            // http.requestPost('register', this.register)
+            //     .then(res => console.log(res));
         }
     }
 }
