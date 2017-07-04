@@ -1,8 +1,24 @@
 <template>
     <div id="login" class="wrapper">
-        <form action="" v-if="countUser > 0">
+        <form v-on:submit.prevent="onLogin()" v-if="countUser > 0">
             <div class="group">
                 <h3>เข้าสู่ระบบ</h3>
+            </div>
+    
+            <div class="group">
+                <label>อีเมล์ :</label>
+                <input type="text" v-model="login.email" v-validate="'required'" name="email">
+                <span class="error">{{ errors.first('email') }}</span>
+            </div>
+    
+            <div class="group">
+                <label>รหัสผ่าน :</label>
+                <input type="password" v-model="login.password" v-validate="'required'" name="password">
+                <span class="error">{{ errors.first('password') }}</span>
+            </div>
+    
+            <div class="group">
+                <button class="button">เข้าสู่ระบบ</button>
             </div>
         </form>
     
@@ -12,12 +28,19 @@
             </div>
     
             <div class="group">
-                <label for="">ชื่อ-สกุล :</label>
-                <input type="text" v-model="register.name">
+                {{ error_message }}
             </div>
     
             <div class="group">
-                <label for="">ชื่อผู้ใช้งาน :</label>
+                <label for="">ชื่อ-สกุล :</label>
+                <input type="text" v-model="register.name" v-validate="'required'" name="name">
+                <span class="error">
+                    {{ errors.first('name') }}
+                </span>
+            </div>
+    
+            <div class="group">
+                <label for="">อีเมล์ :</label>
                 <input type="text" v-model="register.email" v-validate="'required|email'" name="email">
                 <span class="error">
                     {{ errors.first('email') }}
@@ -26,11 +49,14 @@
     
             <div class="group">
                 <label for="">รหัสผ่าน :</label>
-                <input type="text" v-model="register.password">
+                <input type="password" v-model="register.password" v-validate="'required'" name="password">
+                <span class="error">
+                    {{ errors.first('password') }}
+                </span>
             </div>
     
             <div class="group">
-                <button class="button" :disabled="errors.errors.length > 0">บันทึกข้อมูล</button>
+                <button class="button">บันทึกข้อมูล</button>
             </div>
         </form>
     </div>
@@ -47,7 +73,12 @@ export default {
                 email: null,
                 password: null,
                 name: null
-            }
+            },
+            login: {
+                email: null,
+                password: null
+            },
+            error_message: ''
         }
     },
     created() {
@@ -61,10 +92,18 @@ export default {
     methods: {
         onRegister() {
             this.$validator.validateAll().then(valid => {
-                console.log(valid);
+                // if (!valid) return;
+                http.requestPost('register', this.register)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(res => {
+                        this.error_message = res.data.message;
+                    });
             });
-            // http.requestPost('register', this.register)
-            //     .then(res => console.log(res));
+        },
+        onLogin() {
+
         }
     }
 }

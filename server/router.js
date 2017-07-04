@@ -12,7 +12,11 @@ router.get('/countUser', (req, res) => {
 // register first
 router.post('/register', (req, res) => {
     let model = new database.userCollection(req.body);
-    res.send(model);
+    model.save((err, data) => {
+        if (err)
+            return res.status(400).send({ message: err.message });
+        res.send({ message: 'success', data });
+    });
 });
 
 module.exports = router;
