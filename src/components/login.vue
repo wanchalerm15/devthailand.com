@@ -8,6 +8,10 @@
             </div>
     
             <div class="group">
+                {{ error_message }}
+            </div>
+    
+            <div class="group">
                 <label>อีเมล์ :</label>
                 <input type="text" v-model="login.email" v-validate="'required'" name="email">
                 <span class="error">{{ errors.first('email') }}</span>
@@ -62,11 +66,12 @@
                 <button class="button">บันทึกข้อมูล</button>
             </div>
         </form>
+    
     </div>
 </template>
 
 <script>
-import http from '../store/http';
+import http, { Url, Cookie } from '../store/http';
 
 export default {
     name: 'login',
@@ -84,30 +89,37 @@ export default {
             error_message: ''
         }
     },
+
     created() {
         this.$store.dispatch('countUser');
     },
+
     computed: {
         countUser() {
             return this.$store.getters.countUser;
         }
     },
+
     methods: {
         onRegister() {
             this.$validator.validateAll().then(valid => {
                 if (!valid) return;
-                http.requestPost('register', this.register)
+                http.requestPost(Url.Register, this.register)
                     .then(res => {
                         this.$store.dispatch('countUser');
                     })
-                    .catch(res => {
-                        this.error_message = res.data.message;
-                    });
+                    .catch(res => this.error_message = res.data.message);
             });
         },
         onLogin() {
             this.$validator.validateAll().then(valid => {
-                console.log(valid);
+                if (!valid) return;
+                http.requestPost(Url.Login, this.login)
+                    .then(res => {
+                        Cookie.authen(res.authen);
+                        this.$router.push({ path: Url.Home });
+                    })
+                    .catch(res => this.error_message = res.data.message);
             });
         }
     }

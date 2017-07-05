@@ -23,5 +23,6 @@ const userCollection = database.model('Users', userSchema);
 
 module.exports = {
     database,
+    security,
     userCollection
 };

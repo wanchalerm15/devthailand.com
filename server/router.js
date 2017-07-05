@@ -19,8 +19,20 @@ router.post(Url.Register, (req, res) => {
 });
 
 // login route
-router.post(Url.Login, (req, res) => {
-    res.end();
+router.post(Url.Login, (req, response) => {
+    const email = req.body.email || null;
+    const password = req.body.password || null;
+    // connect database
+    database.userCollection.findOne({ email })
+        .then(res => {
+            if (res && database.security.validate(res.password, password))
+                return response.send({
+                    message: 'Login successful.',
+                    authen: database.security.crypto.Encrypt(res.email)
+                });
+            response.status(400).send({ message: 'Email or password incorrect.' });
+        })
+        .catch(res => response.status(500).send(res));
 });
 
 module.exports = router;

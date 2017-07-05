@@ -1,9 +1,9 @@
-import http from './http';
+import http, { Url } from './http';
 
 export default {
     countUser(state) {
-        http.requestGet('countUser')
-            .then(res => state.countUser = res.data.count)
+        http.requestGet(Url.CountUser)
+            .then(res => state.countUser = res.count)
             .catch(err => console.log(err))
     }
 };
