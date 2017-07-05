@@ -2,5 +2,9 @@
     "Home": "/",
     "Register": "/register",
     "Login": "/login",
-    "CountUser": "/countUser"
+    "CountUser": "/countUser",
+    "Admin": {
+        "Home": "/administrator",
+        "Category": "/administrator/category"
+    }
 }

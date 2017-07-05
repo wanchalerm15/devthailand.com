@@ -117,7 +117,7 @@ export default {
                 http.requestPost(Url.Login, this.login)
                     .then(res => {
                         Cookie.authen(res.authen);
-                        this.$router.push({ path: Url.Home });
+                        this.$router.push({ path: Url.Admin.Home });
                     })
                     .catch(res => this.error_message = res.data.message);
             });

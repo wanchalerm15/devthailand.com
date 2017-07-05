@@ -4,7 +4,7 @@ const address = 'mongodb://localhost/devthailand';
 const database = mongoose.createConnection(address);
 mongoose.Promise = global.Promise;
 
-// Begin    For User Collection
+// For User Collection
 const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -19,10 +19,17 @@ userSchema.pre('save', function(next) {
     next();
 });
 const userCollection = database.model('Users', userSchema);
-// End      For User Collection
+
+// For Category collection
+const categorySchema = mongoose.Schema({
+    category_name: { type: String, required: true },
+    category_detail: { type: String }
+});
+const categoryCollection = database.model('categories', categorySchema);
 
 module.exports = {
     database,
     security,
-    userCollection
+    userCollection,
+    categoryCollection
 };

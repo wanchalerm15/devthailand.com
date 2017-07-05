@@ -7,7 +7,8 @@ import actions from './actions';
 Vue.use(Vuex);
 
 const state = {
-    countUser: null
+    countUser: null,
+    categories: []
 };
 
 export default new Vuex.Store({

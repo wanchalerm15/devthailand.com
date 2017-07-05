@@ -50,11 +50,21 @@ class RsaCrypto {
     }
 
     static Decrypt(cipherText) {
-        return crypto.privateDecrypt(keypair.private, new Buffer(cipherText, RsaCrypto.encode())).toString('utf8');
+        try {
+            return crypto.privateDecrypt(keypair.private, new Buffer(cipherText, RsaCrypto.encode())).toString('utf8');
+        } catch (e) {
+            console.log('RsaCrypto Decrypt : ', e);
+            return null;
+        }
     }
 
     static Encrypt(plaintText) {
-        return crypto.publicEncrypt(keypair.public, new Buffer(plaintText)).toString(RsaCrypto.encode());
+        try {
+            return crypto.publicEncrypt(keypair.public, new Buffer(plaintText)).toString(RsaCrypto.encode());
+        } catch (e) {
+            console.log('RsaCrypto Encrypt : ', e);
+            return null;
+        }
     }
 }
 

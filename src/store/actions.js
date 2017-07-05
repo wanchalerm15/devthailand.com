@@ -1,3 +1,4 @@
 export default {
-    countUser: ({ commit }) => commit('countUser')
+    countUser: ({ commit }) => commit('countUser'),
+    categories: ({ commit }) => commit('categories')
 }

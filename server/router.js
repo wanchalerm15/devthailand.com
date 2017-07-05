@@ -35,4 +35,26 @@ router.post(Url.Login, (req, response) => {
         .catch(res => response.status(500).send(res));
 });
 
+// category route GET
+router.get(Url.Admin.Category, (req, response) => {
+    store.getCategories()
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res));
+});
+// category route POST
+router.post(Url.Admin.Category, (req, response) => {
+    const category = new database.categoryCollection(req.body);
+    category.save((err, res) => {
+        if (err) return response.status(400).send(err);
+        response.send(res);
+    });
+});
+// category router DELETE
+router.delete(`${Url.Admin.Category}/:id`, (req, response) => {
+    const id = req.params['id'] || '0';
+    database.categoryCollection.findByIdAndRemove(id)
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res))
+});
+
 module.exports = router;

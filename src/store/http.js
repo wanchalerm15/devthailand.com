@@ -19,6 +19,11 @@ export default {
             .then(res => responseThen(res))
             .catch(err => responseCatch(err));
     },
+    requestDelete(url) {
+        return axios.delete(getAddress(url))
+            .then(res => responseThen(res))
+            .catch(err => responseCatch(err));
+    },
     requestPost(url, model) {
         return axios.post(getAddress(url), model)
             .then(res => responseThen(res))
