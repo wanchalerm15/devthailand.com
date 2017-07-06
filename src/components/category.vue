@@ -35,7 +35,7 @@
                     <td>{{ item.category_name }}</td>
                     <td>{{ item.category_detail || 'ไม่มีข้อมูล' }}</td>
                     <td>
-                        <a href="">แก้ไข</a>
+                        <a @click="onGetUpdateModel(item)">แก้ไข</a>
                         <a @click="onCategoryDelete(item)">ลบทิ้ง</a>
                     </td>
                 </tr>
@@ -53,6 +53,7 @@ export default {
     data() {
         return {
             category: {
+                _id: null,
                 category_name: null,
                 category_detail: null
             },
@@ -74,13 +75,24 @@ export default {
         onCategoryPost() {
             this.$validator.validateAll().then(valid => {
                 if (!valid) return;
-                http.requestPost(Url.Admin.Category, this.category)
-                    .then(res => {
-                        this.onCategoryClear();
-                        this.$store.dispatch('categories');
-                    })
-                    .catch(res => this.error_message = res.data.message);
+                // Update
+                if (this.category._id) {
+                    http.requestPut(`${Url.Admin.Category}/${this.category._id}`, this.category)
+                        .then(res => responseThen(res))
+                        .catch(res => this.error_message = res.data.message);
+                }
+                // Create
+                else {
+                    http.requestPost(Url.Admin.Category, this.category)
+                        .then(res => responseThen(res))
+                        .catch(res => this.error_message = res.data.message);
+                }
             });
+            // for response data update and create
+            const responseThen = response => {
+                this.onCategoryClear();
+                this.$store.dispatch('categories');
+            }
         },
 
         onCategoryClear() {
@@ -94,6 +106,10 @@ export default {
                     this.$store.dispatch('categories');
                 })
                 .catch(res => alert(res.data.message));
+        },
+
+        onGetUpdateModel(item) {
+            this.category = Object.assign({}, item);
         }
     }
 }

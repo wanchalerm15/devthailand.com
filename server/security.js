@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const constants = require('constants');
 
 var SaltLength = 50;
 
@@ -31,16 +32,23 @@ function md5(string) {
 
 const keypair = {
     public: `-----BEGIN RSA PUBLIC KEY-----
-MEgCQQDIaGSjTWP5geRp8A61qpHsACIzPpZVRbmmOCHx2a4W3z32H0mvFo4qG2IbfLRypGAP
-pPR7If2GfbBJfx33/KRNAgMBAAE=
+MIGJAoGBAKmIeTCGDqTz9w3XgaOZwJbfdFWa4/LEQsCWI3zSmSMFRx7grLnh718ULjSpl5tO
+4I38OL0qekKgXQk6fJTQU3M+SI/VZLX54yoJMNhP7Hio5DXhezTk9kj+tSMDhxj654E3qYpU
+ip2C6NMgvu7rvVqbmrGXHlI+EI0jonUd++0ZAgMBAAE=
 -----END RSA PUBLIC KEY-----`,
     private: `-----BEGIN RSA PRIVATE KEY-----
-MIIBOwIBAAJBAMhoZKNNY/mB5GnwDrWqkewAIjM+llVFuaY4IfHZrhbfPfYfSa8WjiobYht8
-tHKkYA+k9Hsh/YZ9sEl/Hff8pE0CAwEAAQJAcTqqQankJoDBMSm05edtcs3QhOuDvMIcVlG4
-vBClT73qFZaZptU9/xwUikjzhDmdx++SQF2YsNLyk45uFA8LcQIhAOiYP7HY8Em0cgJ+q2P6
-B+05KkYFlDndEBRulbDlq3rbAiEA3JL+UqJqQ8QMaFXKOOayZIB9w4FAtfvQbGHcKwrewfcC
-IDHlb0yMuEdncUm9uLCy0359U+c/jSO4m5l2e6A+NMIfAiEAtrUT8UMTntpwJKSbg5Kkxlcg
-1ablAVl7BavyAb1ZU3UCIQCPNPp9w/71SbJSOqde+QWu0B8yxCeRMu8AUv/Kc2aL/Q==
+MIICXAIBAAKBgQCpiHkwhg6k8/cN14GjmcCW33RVmuPyxELAliN80pkjBUce4Ky54e9fFC40
+qZebTuCN/Di9KnpCoF0JOnyU0FNzPkiP1WS1+eMqCTDYT+x4qOQ14Xs05PZI/rUjA4cY+ueB
+N6mKVIqdgujTIL7u671am5qxlx5SPhCNI6J1HfvtGQIDAQABAoGAED7LniK6dIQMQH9OJOcu
+1UZEV4+oGDNGUj4Q2H01v21aC1NsOcO0tF+yrckyhedhDToGFdpkLM5BHAlGttvfoxtT7ll1
+1XYnjPR4cEIuxJRR9RxuvpDvFgbPuHTq6+1dLe+TvgwV3Uye0USY5ahP5+ZrOkvKV+fAPnzP
+eUB2CIECQQDkhTb1GMzD9nX48U8/r39c/6ZoWHhNgq+U6qhX4oC+1sfZOj4GUsHrjjfebZgP
+eerJfJQvIJqKBOmYzZjnaMylAkEAvetkEgWDoFwbmqCGWQBd8KPucCxl27SJ2G+F5To/MZWk
+9LSH/dWkDOnbXUwHkLRDiZe5+zSuKR1SIjtW1b9wZQJAKnPxDMFpsPIFYpT5wvwIbi90K6hb
+2RJxKfoaAhGrF0jxYZKnWSdgrTEDggfcGuvsSTgik0q8Su20s9VmFX9rnQJBAKeIglozaw2G
+swMQH/NbE4M32Roy0BejhwXaOy8e1qgS7dS/fEc6suCBWvVOIE5R9lHl+jXTHt898jooRk1/
+9tECQDvt5tlVN6ki9stqeVU++6eIcRoRcFcMx0x9MXI9vMbBflvjd7p2zuPD+jr04TNT+K/K
+5ff//PV9z+la29viCJ4=
 -----END RSA PRIVATE KEY-----`
 };
 
@@ -65,6 +73,25 @@ class RsaCrypto {
             console.log('RsaCrypto Encrypt : ', e);
             return null;
         }
+    }
+
+    static JWTEncrypt(plaintText, minutes = 1440) {
+        let date = new Date();
+        date.setMinutes(date.getMinutes() + minutes);
+        return RsaCrypto.Encrypt(`${plaintText}:${Date.parse(date)}`);
+    }
+
+    static JWTDecrypt(cipherText) {
+        try {
+            let plaintText = RsaCrypto.Decrypt(cipherText);
+            let texts = plaintText.split(':');
+            let time = new Date(parseInt(texts[1]));
+            if (time >= new Date())
+                return texts[0];
+        } catch (e) {
+            console.log(e);
+        }
+        return null;
     }
 }
 

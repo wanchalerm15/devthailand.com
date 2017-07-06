@@ -21,10 +21,10 @@ export default {
         return "";
     },
 
-    authen(value = null) {
+    authen(value = null, day = 1) {
         const authen_key = 'authen';
         if (value !== null) {
-            this.set(authen_key, value, 0.5);
+            this.set(authen_key, value, day);
         }
         return this.get(authen_key) || null;
     }

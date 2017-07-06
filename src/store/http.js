@@ -13,19 +13,32 @@ const responseCatch = (error) => {
     throw error.response;
 };
 
+const setRequestOptions = () => {
+    let headers = {};
+    const authenCookie = Cookie.authen();
+    if (authenCookie)
+        headers['Authorization'] = authenCookie;
+    return { headers };
+}
+
 export default {
     requestGet(url) {
-        return axios.get(getAddress(url))
+        return axios.get(getAddress(url), setRequestOptions())
             .then(res => responseThen(res))
             .catch(err => responseCatch(err));
     },
     requestDelete(url) {
-        return axios.delete(getAddress(url))
+        return axios.delete(getAddress(url), setRequestOptions())
             .then(res => responseThen(res))
             .catch(err => responseCatch(err));
     },
     requestPost(url, model) {
-        return axios.post(getAddress(url), model)
+        return axios.post(getAddress(url), model, setRequestOptions())
+            .then(res => responseThen(res))
+            .catch(err => responseCatch(err));
+    },
+    requestPut(url, model) {
+        return axios.put(getAddress(url), model, setRequestOptions())
             .then(res => responseThen(res))
             .catch(err => responseCatch(err));
     }

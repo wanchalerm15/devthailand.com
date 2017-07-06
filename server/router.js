@@ -1,7 +1,14 @@
 const router = require('express').Router();
 const store = require('./store');
 const database = require('./database');
+const authenticated = require('./authen');
 const Url = require('../src/url.json');
+
+// router check authen
+router.get(Url.Authen, authenticated, (req, res) => {
+    let authen = database.security.crypto.JWTEncrypt(req.User._id);
+    res.send({ authen });
+});
 
 // check countUser
 router.get(Url.CountUser, (req, res) => {
@@ -17,7 +24,6 @@ router.post(Url.Register, (req, res) => {
         res.send({ message: 'success', data });
     });
 });
-
 // login route
 router.post(Url.Login, (req, response) => {
     const email = req.body.email || null;
@@ -28,7 +34,7 @@ router.post(Url.Login, (req, response) => {
             if (res && database.security.validate(res.password, password))
                 return response.send({
                     message: 'Login successful.',
-                    authen: database.security.crypto.Encrypt(res.email)
+                    authen: database.security.crypto.JWTEncrypt(res._id)
                 });
             response.status(400).send({ message: 'Email or password incorrect.' });
         })
@@ -48,6 +54,14 @@ router.post(Url.Admin.Category, (req, response) => {
         if (err) return response.status(400).send(err);
         response.send(res);
     });
+});
+// category router PUT
+router.put(`${Url.Admin.Category}/:id`, (req, response) => {
+    const id = req.params['id'] || '0';
+    database.categoryCollection
+        .findByIdAndUpdate(id, req.body)
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res));
 });
 // category router DELETE
 router.delete(`${Url.Admin.Category}/:id`, (req, response) => {

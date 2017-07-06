@@ -6,5 +6,6 @@
     "Admin": {
         "Home": "/administrator",
         "Category": "/administrator/category"
-    }
+    },
+    "Authen": "/authentication"
 }
