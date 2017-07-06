@@ -1,4 +1,6 @@
 {
+    "BaseUrl": "http://localhost:9000",
+    "DatabaseUrl": "mongodb://127.0.0.1/devthailand",
     "Home": "/",
     "Register": "/register",
     "Login": "/login",

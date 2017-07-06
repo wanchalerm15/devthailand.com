@@ -3,7 +3,7 @@ import Url from '../url.json';
 import Cookie from './cookie';
 
 const getAddress = (url) => {
-    return `http://localhost:9000/api${url}`;
+    return `${Url.BaseUrl}/api${url}`;
 }
 
 const responseThen = (response) => {

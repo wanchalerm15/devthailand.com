@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const security = require('./security');
-const address = 'mongodb://devthailand:devthailand@devthailand.com/devthailand';
+const Url = require('../src/url.json');
+const address = Url.DatabaseUrl;;
 const database = mongoose.createConnection(address);
 const ObjectId = mongoose.Schema.ObjectId;
 mongoose.Promise = global.Promise;
