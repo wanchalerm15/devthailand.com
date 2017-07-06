@@ -58,6 +58,7 @@ router.post(Url.Admin.Category, (req, response) => {
 // category router PUT
 router.put(`${Url.Admin.Category}/:id`, (req, response) => {
     const id = req.params['id'] || '0';
+    req.body.updated = new Date();
     database.categoryCollection
         .findByIdAndUpdate(id, req.body)
         .then(res => response.send(res))
@@ -97,6 +98,14 @@ router.delete(`${Url.Admin.Video}/:id`, (req, response) => {
     database.videoCollection.findByIdAndRemove(id)
         .then(res => response.send(res))
         .catch(res => response.status(500).send(res))
+});
+// uppdate active product router PUT
+router.put(`${Url.Admin.VideoActive}/:id`, (req, response) => {
+    const id = req.params['id'] || '0';
+    database.videoCollection
+        .findByIdAndUpdate(id, req.body)
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res));
 });
 
 module.exports = router;

@@ -27,6 +27,7 @@
                 <tr>
                     <th>ชื่อประเภท</th>
                     <th>รายละเอียด</th>
+                    <th>วันที่</th>
                     <th>จัดการ</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                 <tr v-for="item in categories" :key="item">
                     <td>{{ item.category_name }}</td>
                     <td>{{ item.category_detail || 'ไม่มีข้อมูล' }}</td>
+                    <td>{{ item.updated }}</td>
                     <td>
                         <a @click="onGetUpdateModel(item)">แก้ไข</a>
                         <a @click="onCategoryDelete(item)">ลบทิ้ง</a>

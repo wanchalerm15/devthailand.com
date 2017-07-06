@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const security = require('./security');
-const address = 'mongodb://localhost/devthailand';
+const address = 'mongodb://devthailand:devthailand@devthailand.com/devthailand';
 const database = mongoose.createConnection(address);
 const ObjectId = mongoose.Schema.ObjectId;
 mongoose.Promise = global.Promise;
-
 // For User Collection
 const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
@@ -33,6 +32,8 @@ const videoSchema = mongoose.Schema({
     video_name: { type: String, required: true },
     video_url: { type: String, required: true },
     video_detail: { type: String },
+    video_active: { type: Boolean, default: false },
+    video_count_view: { type: Number, default: 0 },
     category_id: { type: ObjectId, required: true },
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }

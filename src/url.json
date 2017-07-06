@@ -6,7 +6,8 @@
     "Admin": {
         "Home": "/administrator",
         "Category": "/administrator/category",
-        "Video": "/administrator/video"
+        "Video": "/administrator/video",
+        "VideoActive": "/administrator/video/active"
     },
     "Authen": "/authentication"
 }
