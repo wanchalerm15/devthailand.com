@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     font-family: 'Kanit', sans-serif;
@@ -12,4 +16,8 @@ body {
     font-size: 13px;
     font-weight: 300;
     color: #a00000;
+}
+
+.group {
+    margin-bottom: 0.75em;
 }

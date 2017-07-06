@@ -8,7 +8,8 @@ Vue.use(Vuex);
 
 const state = {
     countUser: null,
-    categories: []
+    categories: [],
+    videos: []
 };
 
 export default new Vuex.Store({

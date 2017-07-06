@@ -5,7 +5,8 @@
     "CountUser": "/countUser",
     "Admin": {
         "Home": "/administrator",
-        "Category": "/administrator/category"
+        "Category": "/administrator/category",
+        "Video": "/administrator/video"
     },
     "Authen": "/authentication"
 }

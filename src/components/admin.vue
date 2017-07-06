@@ -3,33 +3,41 @@
         <nav>
             <ul>
                 <li>
-                    <a @click="types = 1">ประเภท</a>
+                    <router-link :to="Url.Admin.Category">ประเภท</router-link>
                 </li>
                 <li>
-                    <a @click="types = 2">วิดีโอ</a>
+                    <router-link :to="Url.Admin.Video">วิดีโอ</router-link>
                 </li>
                 <li>
                     <a @click="onLogout()">ออกจากระบบ</a>
                 </li>
             </ul>
         </nav>
-        <Category v-if="types === 1"></Category>
+        <CategoryElement v-if="type === 'category'"></CategoryElement>
+        <VideoElement v-if="type === 'video'"></VideoElement>
     </div>
 </template>
 
 <script>
-import Category from './category.vue';
+import CategoryElement from './category.vue';
+import VideoElement from './video.vue';
 import { Cookie, Url } from '../store/http.js';
 
 export default {
     name: 'admin',
+    props: {
+        type: String
+    },
     data() {
         return {
-            types: 1
-        }
+            Url
+        };
+    },
+    created() {
     },
     components: {
-        Category
+        CategoryElement,
+        VideoElement
     },
     methods: {
         onLogout() {

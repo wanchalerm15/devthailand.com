@@ -1,0 +1,143 @@
+<template>
+    <div id="video">
+        <form @submit.prevent="onSubmit()">
+            <div class="group">
+                {{ error_message }}
+            </div>
+    
+            <div class="group">
+                <label>ชื่อวิดีโอ :</label>
+                <input type="text" name="video_name" v-model="form.video_name" v-validate="'required'">
+                <span class="error">{{ errors.first('video_name') }}</span>
+            </div>
+    
+            <div class="group">
+                <label>ลิงค์วิดีโอ :</label>
+                <input type="text" name="video_url" v-model="form.video_url" v-validate="'required|url'">
+                <span class="error">{{ errors.first('video_url') }}</span>
+            </div>
+    
+            <div class="group">
+                <label>รายละเอียดวิดีโอ :</label>
+                <textarea type="text" name="video_detail" v-model="form.video_detail"></textarea>
+                <span class="error">{{ errors.first('video_detail') }}</span>
+            </div>
+    
+            <div class="group">
+                <label>ประเภท :</label>
+                <select name="category_id" v-model="form.category_id" v-validate="'required'">
+                    <option value="">เลือกประเภทวิดีโอ</option>
+                    <option v-for="item in categories" :key="item" :value="item._id">{{ item.category_name }}</option>
+                </select>
+                <span class="error">{{ errors.first('category_id') }}</span>
+            </div>
+    
+            <div class="group">
+                <button class="button">บันทึกข้อมูล</button>
+                <a @click="onClear()">ล้างข้อมูล</a>
+            </div>
+        </form>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>ชื่อวิดีโอ</th>
+                    <th>ประเภท</th>
+                    <th>ลิงค์วิดีโอ</th>
+                    <th>รายละเอียด</th>
+                    <th>วันที่</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in videos" :key="item">
+                    <td>{{ item.video_name }}</td>
+                    <td>{{ item.category.category_name }}</td>
+                    <td>{{ item.video_url }}</td>
+                    <td>{{ item.video_detail || 'ไม่มีข้อมูล' }}</td>
+                    <td>{{ item.updated }}</td>
+                    <td>
+                        <a @click="onShowUpdate(item)">แก้ไข</a>
+                        <a @click="onDelete(item)">ลบทิ้ง</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+import http, { Url } from '../store/http.js';
+
+export default {
+    name: "video",
+    data() {
+        return {
+            form: {
+                _id: null,
+                video_name: null,
+                video_url: null,
+                video_detail: null,
+                category_id: ''
+            },
+            error_message: null,
+            hello: 'Hello World'
+        }
+    },
+    created() {
+        this.$store.dispatch('videos');
+        this.$store.dispatch('categories');
+    },
+    computed: {
+        videos() {
+            return this.$store.getters.videos;
+        },
+        categories() {
+            return this.$store.getters.categories;
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.$validator.validateAll().then(valid => {
+                if (!valid) return;
+                // Update
+                if (this.form._id) {
+                    http.requestPut(`${Url.Admin.Video}/${this.form._id}`, this.form)
+                        .then(res => responseThen(res))
+                        .catch(res => this.error_message = res.data.message);
+                }
+                // Delete
+                else {
+                    http.requestPost(Url.Admin.Video, this.form)
+                        .then(res => responseThen(res))
+                        .catch(res => this.error_message = res.data.message);
+                }
+            });
+            // response then promise
+            const responseThen = res => {
+                this.onClear();
+                this.$store.dispatch('videos');
+            };
+        },
+        onClear() {
+            this.form = {};
+            this.form.category_id = '';
+            this.$validator.clean();
+        },
+        onDelete(item) {
+            http.requestDelete(`${Url.Admin.Video}/${item._id}`)
+                .then(res => {
+                    this.$store.dispatch('videos');
+                })
+                .catch(res => this.error_message = res.data.message);
+        },
+        onShowUpdate(item) {
+            this.form = Object.assign({}, item);
+        },
+        showData(data) {
+            console.log(data);
+        }
+    }
+}
+</script>
+

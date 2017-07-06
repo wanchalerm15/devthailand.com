@@ -10,5 +10,10 @@ export default {
         http.requestGet(Url.Admin.Category)
             .then(res => state.categories = res)
             .catch(err => console.log(err));
+    },
+    videos(state) {
+        http.requestGet(Url.Admin.Video)
+            .then(res => state.videos = res)
+            .catch(res => console.log(err))
     }
 };

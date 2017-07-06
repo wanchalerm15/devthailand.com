@@ -71,4 +71,32 @@ router.delete(`${Url.Admin.Category}/:id`, (req, response) => {
         .catch(res => response.status(500).send(res))
 });
 
+// product route GET
+router.get(Url.Admin.Video, (req, response) => {
+    store.getVideos()
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res));
+});
+// product router POST
+router.post(Url.Admin.Video, (req, response) => {
+    new database.videoCollection(req.body)
+        .save()
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res))
+});
+// product router PUT
+router.put(`${Url.Admin.Video}/:id`, (req, response) => {
+    const id = req.params['id'] || '0';
+    database.videoCollection.findByIdAndUpdate(id, req.body)
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res));
+});
+// product router DELETE
+router.delete(`${Url.Admin.Video}/:id`, (req, response) => {
+    const id = req.params['id'] || '0';
+    database.videoCollection.findByIdAndRemove(id)
+        .then(res => response.send(res))
+        .catch(res => response.status(500).send(res))
+});
+
 module.exports = router;

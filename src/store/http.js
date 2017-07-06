@@ -10,7 +10,12 @@ const responseThen = (response) => {
     return response.data;
 };
 const responseCatch = (error) => {
-    throw error.response;
+    let response = error.response;
+    if (response.data) {
+        if (response.data.errmsg)
+            response.data.message = response.data.errmsg;
+    }
+    throw response;
 };
 
 const setRequestOptions = () => {
