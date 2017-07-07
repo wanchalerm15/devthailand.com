@@ -32,6 +32,7 @@ const categoryCollection = database.model('categories', categorySchema);
 const videoSchema = mongoose.Schema({
     video_name: { type: String, required: true },
     video_url: { type: String, required: true },
+    video_image: { type: String },
     video_detail: { type: String },
     video_active: { type: Boolean, default: false },
     video_count_view: { type: Number, default: 0 },

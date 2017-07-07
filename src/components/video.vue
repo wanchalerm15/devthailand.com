@@ -18,6 +18,12 @@
             </div>
     
             <div class="group">
+                <label>ลิงค์รูปภาพวิดีโอ :</label>
+                <input type="text" name="video_image" v-model="form.video_image">
+                <span class="error">{{ errors.first('video_image') }}</span>
+            </div>
+    
+            <div class="group">
                 <label>รายละเอียดวิดีโอ :</label>
                 <textarea type="text" name="video_detail" v-model="form.video_detail"></textarea>
                 <span class="error">{{ errors.first('video_detail') }}</span>
@@ -44,6 +50,7 @@
                     <th>ชื่อวิดีโอ</th>
                     <th>ประเภท</th>
                     <th>ลิงค์วิดีโอ</th>
+                    <th>ลิงค์รูปภาพวิดีโอ</th>
                     <th>รายละเอียด</th>
                     <th>วันที่</th>
                     <th>จัดการ</th>
@@ -53,7 +60,12 @@
                 <tr v-for="item in videos" :key="item">
                     <td>{{ item.video_name }}</td>
                     <td>{{ item.category.category_name }}</td>
-                    <td>{{ item.video_url }}</td>
+                    <td>
+                        <a :href="item.video_url" target="_blank">เปิดลิงค์</a>
+                    </td>
+                    <td>
+                        <a :href="item.video_image" target="_blank">เปิดลิงค์</a>
+                    </td>
                     <td>{{ item.video_detail || 'ไม่มีข้อมูล' }}</td>
                     <td>{{ item.updated }}</td>
                     <td>
@@ -77,11 +89,11 @@ export default {
                 _id: null,
                 video_name: null,
                 video_url: null,
+                video_image: null,
                 video_detail: null,
                 category_id: ''
             },
-            error_message: null,
-            hello: 'Hello World'
+            error_message: null
         }
     },
     created() {
@@ -130,6 +142,9 @@ export default {
                     this.$store.dispatch('videos');
                 })
                 .catch(res => this.error_message = res.data.message);
+        },
+        onShowUpdate(item) {
+            this.form = Object.assign({}, item);
         }
     }
 }

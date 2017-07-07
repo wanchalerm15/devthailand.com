@@ -1,15 +1,10 @@
 <template>
     <div id="navbar">
-        <div class="box">
-            <h1>
-                www.
-                <span>dev</span>thailand.
-                <span>com</span>
-            </h1>
-            <h4>รับทำเว็บ Application ไม่ว่าจะเป็นเว็บขายสินค้าเว็บบริษัท องค์กร เว็บโรงเรียน เว็บราชการต่างๆ </h4>
-        </div>
-        <aside>
-            <ul class="left">
+        <nav class="wrapper">
+            <a href="" class="logo">
+                <img src="/images/logo.svg" alt="devthailand logo">
+            </a>
+            <ul>
                 <li>
                     <router-link :to="Url.Home">
                         <i class="fa fa-home"></i> หน้าแรก
@@ -25,23 +20,18 @@
                         <i class="fa fa-phone"></i> ติดต่อเรา
                     </router-link>
                 </li>
-                <li v-if="authen">
-                    <router-link :to="Url.Admin.Home">
-                        <i class="fa fa-lock"></i> เข้าไปจัดการวิดีโอ
-                    </router-link>
-                </li>
-    
                 <li>
                     <router-link :to="Url.Login" v-if="!authen">
-                        <i class="fa fa-sign-in"></i> เข้าสู่ระบบ
+                        <i class="fa fa-sign-in"></i>
                     </router-link>
-                    <a v-if="authen" @click="onLogout()">
-                        ออกจากระบบ
-                        <i class="fa fa-sign-out"></i>
-                    </a>
+                </li>
+                <li v-if="authen">
+                    <router-link :to="Url.Admin.Home" class="active">
+                        <i class="fa fa-lock"></i>
+                    </router-link>
                 </li>
             </ul>
-        </aside>
+        </nav>
     </div>
 </template>
 
@@ -71,35 +61,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$navbarHeight: 80px;
 #navbar {
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 200px;
-    height: 100%;
-    padding-top: 50px;
-}
-
-aside {
-    width: 300px;
-    border: solid 1px red;
-    text-align: center;
-}
-
-.box {
-    padding: 15px;
-    background-color: #292826;
-    margin-bottom: 30px;
-    span {
-        color: #cfb17b;
-    }
+    background-color: white;
+    height: $navbarHeight;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .05);
+    border-bottom: solid 1px white;
+    font-size: 15px;
 }
 
 ul {
+    float: right;
     list-style: none;
-    a {
-        text-decoration: none;
-        color: white;
+    >li {
+        float: left;
+        >a {
+            display: block;
+            color: teal;
+            text-decoration: none;
+            height: $navbarHeight;
+            line-height: $navbarHeight;
+            padding: 0 25px;
+            font-weight: 300;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+
+            &:hover,
+            &:focus,
+            &.router-link-exact-active,
+            &.router-link-active.active {
+                background-color: mediumaquamarine;
+                color: white;
+            }
+            &.router-link-exact-active,
+            &.router-link-active.active {
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.logo {
+    display: block;
+    float: left;
+    height: $navbarHeight;
+    padding: 15px;
+    img {
+        height: 100%;
     }
 }
 </style>
