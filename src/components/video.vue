@@ -130,12 +130,6 @@ export default {
                     this.$store.dispatch('videos');
                 })
                 .catch(res => this.error_message = res.data.message);
-        },
-        onShowUpdate(item) {
-            this.form = Object.assign({}, item);
-        },
-        showData(data) {
-            console.log(data);
         }
     }
 }

@@ -9,6 +9,11 @@ body {
     font-family: 'Kanit', sans-serif;
 }
 
+body {
+    background-color: #f7f7f7;
+    padding-top: 50px;
+}
+
 .wrapper {
     width: 1200px;
     margin: auto;
