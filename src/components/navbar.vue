@@ -1,6 +1,14 @@
 <template>
     <div id="navbar">
-        <nav class="wrapper">
+        <div class="box">
+            <h1>
+                www.
+                <span>dev</span>thailand.
+                <span>com</span>
+            </h1>
+            <h4>รับทำเว็บ Application ไม่ว่าจะเป็นเว็บขายสินค้าเว็บบริษัท องค์กร เว็บโรงเรียน เว็บราชการต่างๆ </h4>
+        </div>
+        <aside>
             <ul class="left">
                 <li>
                     <router-link :to="Url.Home">
@@ -22,9 +30,7 @@
                         <i class="fa fa-lock"></i> เข้าไปจัดการวิดีโอ
                     </router-link>
                 </li>
-            </ul>
     
-            <ul class="right">
                 <li>
                     <router-link :to="Url.Login" v-if="!authen">
                         <i class="fa fa-sign-in"></i> เข้าสู่ระบบ
@@ -35,7 +41,7 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </aside>
     </div>
 </template>
 
@@ -65,49 +71,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$navHeight: 50px;
 #navbar {
-    height: $navHeight;
-    width: 100%;
+    color: white;
     position: fixed;
-    background-color: white;
-    left: 0;
     top: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+    left: 200px;
+    height: 100%;
+    padding-top: 50px;
+}
+
+aside {
+    width: 300px;
+    border: solid 1px red;
+    text-align: center;
+}
+
+.box {
+    padding: 15px;
+    background-color: #292826;
+    margin-bottom: 30px;
+    span {
+        color: #cfb17b;
+    }
 }
 
 ul {
     list-style: none;
-
-    >li {
-        float: left;
-        >a {
-            height: $navHeight;
-            line-height: $navHeight;
-            display: block;
-            padding: 0 20px;
-            text-decoration: none;
-            font-weight: 300;
-            font-size: 14px;
-            color: #606060;
-            &:hover {
-                color: lightseagreen;
-            }
-        }
-        &:first-child>a {
-            padding-left: 0;
-        }
-        &:last-child>a {
-            padding-right: 0;
-        }
-    }
-
-    &.left {
-        float: left;
-    }
-
-    &.right {
-        float: right;
+    a {
+        text-decoration: none;
+        color: white;
     }
 }
 </style>
