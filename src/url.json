@@ -11,5 +11,7 @@
         "Video": "/administrator/video",
         "VideoActive": "/administrator/video/active"
     },
-    "Authen": "/authentication"
+    "Authen": "/authentication",
+    "About": "/about",
+    "Contact": "/contact"
 }
