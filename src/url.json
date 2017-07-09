@@ -9,6 +9,7 @@
         "Home": "/administrator",
         "Category": "/administrator/category",
         "Video": "/administrator/video",
+        "Image": "/administrator/image",
         "VideoActive": "/administrator/video/active"
     },
     "Authen": "/authentication",

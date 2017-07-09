@@ -15,6 +15,7 @@ const router = new VueRouter({
         { path: Url.Admin.Home, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'home' } },
         { path: Url.Admin.Category, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'category' } },
         { path: Url.Admin.Video, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'video' } },
+        { path: Url.Admin.Image, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'image' } },
         { path: Url.Admin.VideoActive, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'video-active' } },
     ]
 });

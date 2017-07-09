@@ -6,25 +6,19 @@
             </div>
     
             <div class="group">
-                <label>ชื่อวิดีโอ :</label>
+                <label>ชื่อรูปภาพ :</label>
                 <input type="text" name="video_name" v-model="form.video_name" v-validate="'required'">
                 <span class="error">{{ errors.first('video_name') }}</span>
             </div>
     
             <div class="group">
-                <label>ลิงค์วิดีโอ :</label>
-                <input type="text" name="video_url" v-model="form.video_url" v-validate="'required|url'">
-                <span class="error">{{ errors.first('video_url') }}</span>
-            </div>
-    
-            <div class="group">
-                <label>ลิงค์รูปภาพวิดีโอ :</label>
+                <label>ลิงค์รูปภาพ :</label>
                 <input type="text" name="video_image" v-model="form.video_image">
                 <span class="error">{{ errors.first('video_image') }}</span>
             </div>
     
             <div class="group">
-                <label>รายละเอียดวิดีโอ :</label>
+                <label>รายละเอียดรูปภาพ :</label>
                 <textarea type="text" name="video_detail" v-model="form.video_detail"></textarea>
                 <span class="error">{{ errors.first('video_detail') }}</span>
             </div>
@@ -32,7 +26,7 @@
             <div class="group">
                 <label>ประเภท :</label>
                 <select name="category_id" v-model="form.category_id" v-validate="'required'">
-                    <option value="">เลือกประเภทวิดีโอ</option>
+                    <option value="">เลือกประเภทรูปภาพ</option>
                     <option v-for="item in categories" :key="item" :value="item._id">{{ item.category_name }}</option>
                 </select>
                 <span class="error">{{ errors.first('category_id') }}</span>
@@ -47,22 +41,18 @@
         <table>
             <thead>
                 <tr>
-                    <th>ชื่อวิดีโอ</th>
+                    <th>ชื่อรูปภาพ</th>
                     <th>ประเภท</th>
-                    <th>ลิงค์วิดีโอ</th>
-                    <th>ลิงค์รูปภาพวิดีโอ</th>
+                    <th>ลิงค์รูปภาพ</th>
                     <th>รายละเอียด</th>
                     <th>วันที่</th>
                     <th>จัดการ</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in videos" :key="item" v-if="item.video_url">
+                <tr v-for="item in videos" :key="item" v-if="!item.video_url">
                     <td>{{ item.video_name }}</td>
                     <td>{{ item.category.category_name }}</td>
-                    <td>
-                        <a :href="item.video_url" target="_blank">เปิดลิงค์</a>
-                    </td>
                     <td>
                         <a :href="item.video_image" target="_blank">เปิดลิงค์</a>
                     </td>
@@ -88,7 +78,6 @@ export default {
             form: {
                 _id: null,
                 video_name: null,
-                video_url: null,
                 video_image: null,
                 video_detail: null,
                 category_id: ''
@@ -149,4 +138,3 @@ export default {
     }
 }
 </script>
-

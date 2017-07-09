@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$navbarHeight: 80px;
+$navbarHeight: 70px;
 #navbar {
     background-color: white;
     height: $navbarHeight;
@@ -77,7 +77,7 @@ ul {
         float: left;
         >a {
             display: block;
-            color: teal;
+            color: black;
             text-decoration: none;
             height: $navbarHeight;
             line-height: $navbarHeight;

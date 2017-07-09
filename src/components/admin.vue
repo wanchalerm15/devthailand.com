@@ -12,6 +12,9 @@
                     <router-link :to="Url.Admin.Video">วิดีโอ</router-link>
                 </li>
                 <li>
+                    <router-link :to="Url.Admin.Image">รูปภาพ</router-link>
+                </li>
+                <li>
                     <router-link :to="Url.Admin.VideoActive">เลือกวิดีโอหลัก</router-link>
                 </li>
                 <li>
@@ -21,6 +24,7 @@
         </nav>
         <CategoryElement v-if="type === 'category'"></CategoryElement>
         <VideoElement v-if="type === 'video'"></VideoElement>
+        <ImageElement v-if="type === 'image'"></ImageElement>
         <VideoActiveElement v-if="type === 'video-active'"></VideoActiveElement>
     </div>
 </template>
@@ -29,6 +33,7 @@
 import CategoryElement from './category.vue';
 import VideoElement from './video.vue';
 import VideoActiveElement from './video-active.vue';
+import ImageElement from './image.vue';
 import { Cookie, Url } from '../store/http.js';
 
 export default {
@@ -46,7 +51,8 @@ export default {
     components: {
         CategoryElement,
         VideoElement,
-        VideoActiveElement
+        VideoActiveElement,
+        ImageElement
     },
     methods: {
         onLogout() {
