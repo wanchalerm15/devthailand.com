@@ -1,10 +1,7 @@
 <template>
     <div id="admin">
-        <nav>
+        <nav class="box">
             <ul>
-                <li>
-                    <router-link :to="Url.Home">หน้าแรก</router-link>
-                </li>
                 <li>
                     <router-link :to="Url.Admin.Category">ประเภท</router-link>
                 </li>
@@ -18,7 +15,9 @@
                     <router-link :to="Url.Admin.VideoActive">เลือกวิดีโอหลัก</router-link>
                 </li>
                 <li>
-                    <a @click="onLogout()">ออกจากระบบ</a>
+                    <a @click="onLogout()">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -46,8 +45,6 @@ export default {
             Url
         };
     },
-    created() {
-    },
     components: {
         CategoryElement,
         VideoElement,
@@ -62,4 +59,39 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+$mainColor: cadetblue;
+nav {
+    box-shadow: none;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    ul {
+        list-style: none;
+        >li {
+            float: left;
+            >a {
+                display: block;
+                text-decoration: none;
+                color: black;
+                font-weight: 400;
+                border-right: solid 1px rgba(0, 0, 0, .05);
+                min-width: 100px;
+                text-align: center;
+                cursor: pointer;
+                &.router-link-exact-active {
+                    background-color: $mainColor;
+                    color: white;
+                }
+            }
+        }
+        &:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+    }
+}
+</style>
+
 

@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 $navbarHeight: 70px;
+$mainColor: cadetblue;
 #navbar {
     background-color: white;
     height: $navbarHeight;
@@ -90,7 +91,7 @@ ul {
             &:focus,
             &.router-link-exact-active,
             &.router-link-active.active {
-                background-color: mediumaquamarine;
+                background-color: $mainColor;
                 color: white;
             }
             &.router-link-exact-active,

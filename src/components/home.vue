@@ -21,7 +21,7 @@
             <section v-for="item of videos" :key="item" class="columns" :data-poster="item.video_url ? item.video_image : ''" :data-sub-html="'<h5 style=\'font-weight:400;\'>'+ item.video_name +'</h5><p style=\'font-weight:200;\'>'+ (item.video_detail || 'ไม่มีคำอธิบาย') +'</p>'" :data-src="item.video_url || item.video_image">
                 <div class="boxs">
                     <figure>
-                        <a href="#">
+                        <a :href="item.video_url || item.video_image" target="_blank">
                             <img :src="item.video_image" :alt="item.video_name">
                         </a>
                         <span class="img-detail">
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$mainColor: mediumaquamarine;
+$mainColor: cadetblue;
 .row {
     margin-left: -15px;
     margin-right: -15px;
@@ -70,10 +70,10 @@ $mainColor: mediumaquamarine;
     text-align: center;
     background-color: $mainColor;
     margin-bottom: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     color: white;
     padding: 50px 0 65px 0;
-    border: solid 1px white;
+    border: solid 2px white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
     h1 {
         font-weight: 300;
@@ -126,7 +126,7 @@ $mainColor: mediumaquamarine;
         outline: solid 1px white;
         margin-bottom: 30px;
         &:hover {
-            outline: solid 1px mediumaquamarine;
+            outline: solid 1px $mainColor;
         }
     }
     figure {

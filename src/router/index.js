@@ -12,7 +12,7 @@ const router = new VueRouter({
     routes: [
         { path: Url.Home, component: Home },
         { path: Url.Login, component: Login, beforeEnter: Authen.UnAuthenGuard },
-        { path: Url.Admin.Home, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'home' } },
+        { path: Url.Admin.Home, redirect: Url.Admin.Category },
         { path: Url.Admin.Category, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'category' } },
         { path: Url.Admin.Video, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'video' } },
         { path: Url.Admin.Image, component: Admin, beforeEnter: Authen.AuthenGuard, props: { type: 'image' } },
