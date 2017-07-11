@@ -2,28 +2,29 @@
     <section id="banner">
         <div class="inner">
             <div class="logo">
-                <span class="icon fa-diamond"></span>
+                <img src="/src/images/profile.jpg" alt="wanchaloem laoket">
             </div>
-            <h2>This is Solid State</h2>
-            <p>
-                Another free + fully responsive site template by
+            <h2>ยินดีต้อนรับสู่ devthailand</h2>
+            <p class="thaifont">
+                รับงานเขียนเว็บไซต์ตามที่ลูกค้าสั่งมา และรับสอนเขียนเว็บไซต์ ในราคาถูกและกันเอง
+                <router-link :to="Url.About">ข้อมูลเพิ่มเติม</router-link>
             </p>
         </div>
     </section>
 </template>
 
 <script>
+import { Url } from '../router';
 export default {
     name: 'home',
-    props: {
-        template: {
-            type: String,
-            required: true
+    data() {
+        return {
+            Url
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+#banner {}
 </style>

@@ -36,5 +36,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+#app {
+    .thaifont {
+        font-family: Prompt;
+    }
+}
 </style>

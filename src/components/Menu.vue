@@ -1,19 +1,22 @@
 <template>
     <nav id="menu">
         <div class="inner">
-            <h2>Menu</h2>
+            <h2>เมนูเว็บไซต์</h2>
             <ul class="links">
                 <li>
-                    <a :href="Url.Home">Home</a>
+                    <a :href="Url.Home">
+                        หน้าหลัก
+                    </a>
                 </li>
                 <li>
-                    <a :href="Url.About">About</a>
+                    <a :href="Url.About">
+                        เกี่ยวกับฉัน
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Log In</a>
-                </li>
-                <li>
-                    <a href="#">Sign Up</a>
+                    <a :href="Url.Login">
+                        เข้าสู่ระบบ
+                    </a>
                 </li>
             </ul>
             <a href="#" class="close">Close</a>

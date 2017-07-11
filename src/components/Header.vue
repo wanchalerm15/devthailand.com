@@ -1,10 +1,12 @@
 <template>
     <header id="header" :class="headerClass">
         <h1>
-            <a href="index.html">devthailand.com</a>
+            <a :href="Url.Home">
+                <i class="fa fa-code"></i> devthailand.com
+            </a>
         </h1>
         <nav>
-            <a href="#menu">Menu</a>
+            <a href="#menu">เมนูเว็บไซต์</a>
         </nav>
     </header>
 </template>
@@ -14,6 +16,9 @@ import { Url } from '../router';
 
 export default {
     name: 'header',
+    data() {
+        return { Url }
+    },
     props: {
         headerClass: {
             type: String,
@@ -26,5 +31,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.fa-code {
+    font-weight: 900;
+    font-size: 16px;
+}
 </style>
