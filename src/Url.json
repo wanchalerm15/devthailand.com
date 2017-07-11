@@ -1,5 +1,7 @@
 {
     "Home": "/",
     "About": "/about",
-    "Login": "/login"
+    "Login": "/login",
+
+    "Address": "http://localhost:9000"
 }
