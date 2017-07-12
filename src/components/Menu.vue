@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { Url } from '../router';
+import { Url } from '../http';
 
 export default {
     name: 'menu',

@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <div id="page-wrapper">
+        <!-- Frontend -->
+        <div id="page-wrapper" v-if="!isAuthenticated">
             <HeaderElement></HeaderElement>
             <MenuElement></MenuElement>
             <BannerElement v-if="showBanner"></BannerElement>
@@ -9,6 +10,11 @@
             </section>
             <FooterElement></FooterElement>
         </div>
+        <!-- Backend -->
+        <div id="page-wrapper-admin" v-if="isAuthenticated">
+    
+        </div>
+        <!-- Notification -->
         <div id="error">error please try again มีบางอย่างผิดพลาดเกิดขึ้น</div>
     </div>
 </template>
@@ -18,7 +24,7 @@ import HeaderElement from './Header.vue';
 import MenuElement from './Menu.vue';
 import BannerElement from './Banner.vue';
 import FooterElement from './Footer.vue';
-import { Url } from '../router';
+import { Url } from '../http';
 
 export default {
     name: 'app',
@@ -31,6 +37,9 @@ export default {
     computed: {
         showBanner() {
             return this.$route.path === Url.Home;
+        },
+        isAuthenticated() {
+            return this.$route.fullPath.indexOf(Url.Admin.Home) >= 0;
         }
     }
 }
@@ -74,7 +83,16 @@ export default {
     width: 100%;
     padding: 15px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: bold;
+}
+
+#page-wrapper-admin {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
 </style>

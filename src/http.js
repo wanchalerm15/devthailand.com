@@ -1,8 +1,9 @@
 import axios from 'axios';
 import Url from './Url.json';
+import Session from './session';
 
 const address = (url) => {
-    return `${Url.Address}/api/${url}`;
+    return `${Url.Address}/api${url}`;
 };
 
 const requestOptions = () => {
@@ -17,7 +18,10 @@ const responseData = (res) => {
 
 const responseHandle = (res) => {
     let response = res.response;
-    throw response;
+    throw {
+        response: response,
+        message: response.data ? response.data.message : response.statusText
+    };
 };
 
 export default {
@@ -50,4 +54,4 @@ export default {
     },
 }
 
-export { Url, axios };
+export { Url, axios, Session };

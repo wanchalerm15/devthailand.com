@@ -1,9 +1,9 @@
 <template>
     <header id="header" :class="headerClass">
         <h1>
-            <a :href="Url.Home">
+            <router-link :to="Url.Home">
                 <i class="fa fa-code"></i> devthailand.com
-            </a>
+            </router-link>
         </h1>
         <nav>
             <a href="#menu">เมนูเว็บไซต์</a>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Url } from '../router';
+import { Url } from '../http';
 
 export default {
     name: 'header',

@@ -2,6 +2,8 @@
     "Home": "/",
     "About": "/about",
     "Login": "/login",
-
+    "Admin": {
+        "Home": "/administrator"
+    },
     "Address": "http://localhost:9000"
 }

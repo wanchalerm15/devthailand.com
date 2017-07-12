@@ -33,7 +33,7 @@
     
                             <div class="group">
                                 <label for="password">Password :</label>
-                                <input type="text" name="password" id="password" v-validate="'required'" v-model="form.Password" />
+                                <input type="password" name="password" id="password" v-validate="'required'" v-model="form.Password" />
                                 <p class="error">{{ errors.first('password') }}</p>
                             </div>
     
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import http, { Url } from '../http';
+import http, { Url, Session } from '../http';
 
 export default {
     name: 'login',
@@ -63,16 +63,16 @@ export default {
     },
     methods: {
         onSubmit() {
-            // http.requistPost(Url.Login)
-            //     .then()
-            this.$validator.validateAll().then(v => {
-                console.log(v);
-                if (v) {
-                    return;
-                }
-                console.log(this.$validator.all());
+            this.$validator.validateAll().then(valid => {
+                if (!valid)
+                    return this.setError('validate');
+                http.requistPost(Url.Login, this.form)
+                    .then(res => {
+                        Session.devAuthen(res.data.token);
+                        this.$router.push(Url.Admin.Home);
+                    })
+                    .catch(res => this.setError(res.message))
             });
-            this.setError(JSON.stringify(this.form));
         }
     }
 }
