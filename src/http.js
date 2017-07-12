@@ -2,7 +2,7 @@ import axios from 'axios';
 import Url from './Url.json';
 
 const address = (url) => {
-    return `${Url.Address}/${url}`;
+    return `${Url.Address}/api/${url}`;
 };
 
 const requestOptions = () => {
@@ -49,3 +49,5 @@ export default {
             .catch(res => responseHandle(res));
     },
 }
+
+export { Url, axios };

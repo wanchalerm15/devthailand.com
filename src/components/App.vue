@@ -9,6 +9,7 @@
             </section>
             <FooterElement></FooterElement>
         </div>
+        <div id="error">error please try again มีบางอย่างผิดพลาดเกิดขึ้น</div>
     </div>
 </template>
 
@@ -40,5 +41,40 @@ export default {
     .thaifont {
         font-family: Prompt;
     }
+    .group {
+        position: relative;
+        margin-bottom: 15px;
+        .error {
+            display: none;
+            background-color: brown;
+            padding: 5px;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            left: 0;
+            top: 80px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        [aria-invalid="true"]:focus+.error {
+            display: block;
+        }
+    }
+    .group-btn {
+        margin-top: 30px;
+    }
+}
+
+#error {
+    display: none;
+    background-color: brown;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 </style>
