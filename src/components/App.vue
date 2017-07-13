@@ -39,7 +39,8 @@ export default {
             return this.$route.path === Url.Home;
         },
         isAuthenticated() {
-            return this.$route.fullPath.indexOf(Url.Admin.Home) >= 0;
+            const searchIndex = this.$route.fullPath.indexOf(Url.Admin.Home);
+            return searchIndex >= 0;
         }
     }
 }
@@ -61,9 +62,10 @@ export default {
             width: 100%;
             z-index: 100;
             left: 0;
-            top: 80px;
+            top: auto;
             text-align: center;
             border-radius: 5px;
+            margin-top: 2px;
         }
         [aria-invalid="true"]:focus+.error {
             display: block;

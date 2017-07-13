@@ -1,17 +1,17 @@
 <template>
     <nav id="navbar-admin">
         <div class="admin-wrapper">
-            <a href="" class="brand">
+            <a :href="Url.Home" class="brand">
                 <i class="fa fa-code"></i> devthailand.com
             </a>
             <ul>
                 <li>
-                    <a :href="Url.Home">
-                        <i class="fa fa-home"></i>
-                    </a>
+                    <router-link :to="Url.Admin.Home">
+                        <i class="fa fa-home"></i> หน้าหลัก
+                    </router-link>
                 </li>
                 <li>
-                    <router-link :to="Url.Home">
+                    <router-link :to="Url.Admin.Activity">
                         <i class="fa fa-address-card-o"></i> กิจกรรม
                     </router-link>
                 </li>
@@ -43,20 +43,24 @@ $navColor: #505050;
 #navbar-admin {
     height: $navHeight;
     background-color: white;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
-    a {
-        color: $navColor !important;
-        &.brand {
-            height: $navHeight;
-            line-height: $navHeight - 2;
-            letter-spacing: 3px;
-            display: block;
-            float: left;
-            font-weight: 600;
-            text-transform: uppercase;
-            i {
-                font-weight: bolder;
-            }
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+}
+
+a {
+    color: $navColor !important;
+    &.brand {
+        height: $navHeight;
+        line-height: $navHeight - 2;
+        letter-spacing: 3px;
+        display: block;
+        float: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: Raleway;
+        font-size: 14px;
+        i {
+            font-weight: bolder;
+            font-size: 17px;
         }
     }
 }
@@ -77,8 +81,15 @@ ul {
             line-height: $navHeight - 2;
             padding: 0 15px;
             border-right: solid 1px rgba(0, 0, 0, .1);
+            font-size: 16px;
             .fa {
                 margin-right: 5px;
+            }
+            &.router-link-exact-active {
+                &,
+                i {
+                    color: lightseagreen !important;
+                }
             }
         }
         &:last-child {

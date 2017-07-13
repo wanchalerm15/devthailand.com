@@ -3,7 +3,8 @@
     "About": "/about",
     "Login": "/login",
     "Admin": {
-        "Home": "/administrator"
+        "Home": "/administrator",
+        "Activity": "/administrator/activity"
     },
     "Address": "http://localhost:9000"
 }
