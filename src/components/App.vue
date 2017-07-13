@@ -12,7 +12,7 @@
         </div>
         <!-- Backend -->
         <div id="page-wrapper-admin" v-if="isAuthenticated">
-    
+            <router-view></router-view>
         </div>
         <!-- Notification -->
         <div id="error">error please try again มีบางอย่างผิดพลาดเกิดขึ้น</div>
@@ -85,14 +85,5 @@ export default {
     text-align: center;
     text-transform: capitalize;
     font-weight: bold;
-}
-
-#page-wrapper-admin {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
 }
 </style>

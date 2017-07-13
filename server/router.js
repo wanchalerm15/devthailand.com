@@ -4,6 +4,7 @@ const Url = require('../src/Url.json');
 const Store = require('./store');
 const Security = require('./security');
 
+// Login authentication
 Router.post(Url.Login, (req, res) => {
     let searchUsers = Store.SuperUsers().filter(m =>
         m.Username == req.body.Username &&

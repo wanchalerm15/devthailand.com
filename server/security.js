@@ -6,5 +6,8 @@ module.exports = {
     },
     decrypt(cipherText) {
         return Jwt.decode(cipherText);
+    },
+    authentication(req, res, next) {
+        console.log(req.body);
     }
 };
