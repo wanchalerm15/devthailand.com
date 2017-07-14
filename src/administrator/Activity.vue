@@ -9,23 +9,61 @@
             <div class="admin-row">
                 <div class="admin-columns c-side">
                     <div class="admin-panel">
-                        <form action="">
+                        <form @submit.prevent="onSubmit()">
                             <div class="group">
                                 <label for="topic">หัวข้อ :</label>
-                                <input type="text" class="input" id="topic" name="topic" v-validate="'required'">
+                                <input type="text" v-model="form.topic" class="input" id="topic" name="topic" v-validate="'required'">
                                 <p class="error">{{ errors.first('topic') }}</p>
                             </div>
     
                             <div class="group">
                                 <label for="body">รายละเอียด :</label>
-                                <textarea type="text" class="input" id="body" name="body" v-validate="'required'" rows="5"></textarea>
+                                <textarea type="text" v-model="form.body" class="input" id="body" name="body" v-validate="'required'" rows="5"></textarea>
                                 <p class="error">{{ errors.first('body') }}</p>
+                            </div>
+    
+                            <div class="group">
+                                <label for="image">ที่อยู่รูปภาพ :</label>
+                                <input type="text" v-model="form.image" name="image" id="image" class="input">
+                            </div>
+    
+                            <div class="group">
+                                <button type="submit" class="special fit">บันทึกข้อมูล</button>
+                            </div>
+    
+                            <div class="group">
+                                <button @click="onReset()" type="button" class="special fit">ล้างข้อมูล</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="admin-columns c-body">
-                    <div class="admin-panel"></div>
+                    <div class="admin-panel">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>หัวข้อ</th>
+                                    <th>รายละเอียด</th>
+                                    <th>รูปภาพ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item of activities" :key="item">
+                                    <td>{{ item.topic }}</td>
+                                    <td>{{ item.body }}</td>
+                                    <td>
+                                        <a class="link" target="_blank" :href="item.image">ดูภาพ</a>
+                                    </td>
+                                    <td>
+                                        <a @click="form = item" class="link">แก้ไข</a>
+                                        |
+                                        <a @click="onDelete(item._id)" class="link">ลบ</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -33,8 +71,60 @@
 </template>
 
 <script>
+import http, { Url } from '../http';
+
 export default {
-    name: 'activity'
+    name: 'activity',
+    data() {
+        return {
+            form: {
+                topic: null,
+                body: null,
+                image: null
+            }
+        }
+    },
+    created() {
+        this.onReset();
+    },
+    methods: {
+        onSubmit() {
+            this.$validator.validateAll().then(valid => {
+                if (valid) {
+                    if (this.form._id)
+                        this.onUpdate(this.form._id);
+                    else
+                        this.onInsert();
+                }
+                else {
+                    this.setError('validate');
+                }
+            })
+        },
+        onInsert() {
+            http.requistPost(Url.Admin.Activity, this.form)
+                .then(res => this.onReset())
+                .catch(res => this.setError(res.message));
+        },
+        onUpdate(id) {
+            console.log(id);
+        },
+        onDelete(id) {
+            if (confirm('ต้องการลบข้อมูลจริงหรือ?'))
+                http.requestDelete(`${Url.Admin.Activity}/${id}`)
+                    .then(res => this.onReset())
+                    .catch(res => this.setError(res.message));
+        },
+        onReset() {
+            this.form = {};
+            this.$store.dispatch('Activities');
+        }
+    },
+    computed: {
+        activities() {
+            return this.$store.getters.Activities;
+        }
+    }
 }
 </script>
 
@@ -46,4 +136,101 @@ export default {
 .c-body {
     width: 65%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+    height: 40px;
+    border: solid 1px lightseagreen;
+    color: white!important;
+    line-height: 0;
+    font-weight: 400;
+    border-radius: 3px;
+    background-color: lightseagreen;
+    font-size: 16px;
+*/
 </style>

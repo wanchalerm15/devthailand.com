@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style lang="scss">
+$mainColor: lightseagreen;
+
 #app-admin {
     position: fixed;
     left: 0;
@@ -34,6 +36,7 @@ export default {
     height: 100%;
     background-color: #f4f4f4;
     overflow: auto;
+    padding-bottom: 68px;
     * {
         color: #505050;
     }
@@ -55,6 +58,37 @@ export default {
         color: white;
         font-size: 14px;
     }
+
+    .special {
+        height: 40px;
+        line-height: 40px;
+        background-color: $mainColor;
+    }
+
+    form {
+        margin: 0;
+    }
+
+    .link {
+        color: $mainColor !important;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+            color: #cc0000 !important;
+        }
+    }
+
+    .table {
+        td,
+        th {
+            padding: 5px 15px;
+            border-bottom: solid 1px #e0e0e0;
+        }
+        thead th {
+            background-color: $mainColor;
+            color: white;
+        }
+    }
 }
 
 .admin-wrapper {
@@ -65,8 +99,8 @@ export default {
 .admin-panel {
     background-color: white;
     padding: 15px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
-    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .07);
+    border-radius: 2px;
 }
 
 .admin-row {

@@ -19,5 +19,26 @@ Router.post(Url.Login, (req, res) => {
     return res.status(400).send({ message: 'Username or Password is incorrect.' });
 });
 
-
+// Activity 
+Router.get(Url.Admin.Activity, (req, res) => {
+    Store.Activities()
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
+});
+Router.post(Url.Admin.Activity, (req, res) => {
+    new Database.Activity(req.body)
+        .save()
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
+});
+Router.put(`${Url.Admin.Activity}/:id`, (req, res) => {
+    // coding here...
+});
+Router.delete(`${Url.Admin.Activity}/:id`, (req, res) => {
+    const id = req.params['id'] || 0;
+    Database.Activity
+        .findByIdAndRemove(id)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
+});
 module.exports = Router;

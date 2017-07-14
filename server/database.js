@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 const database = mongoose.createConnection('mongodb://localhost/devthailand');
 
 const ActivitySchema = mongoose.Schema({
@@ -7,7 +8,7 @@ const ActivitySchema = mongoose.Schema({
     image: { type: String },
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now },
-});
+}, { versionKey: false });
 
 module.exports = {
     Activity: database.model('activities', ActivitySchema)

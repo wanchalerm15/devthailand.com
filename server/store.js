@@ -1,3 +1,4 @@
+const Database = require('./database');
 module.exports = {
     SuperUsers() {
         const Users = [{
@@ -12,5 +13,8 @@ module.exports = {
             }
         ];
         return Users;
+    },
+    Activities(findObject = {}) {
+        return Database.Activity.find(findObject).sort({ updated: -1 });
     }
 }
