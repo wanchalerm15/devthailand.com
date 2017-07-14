@@ -32,7 +32,7 @@ export default {
             .catch(res => responseHandle(res));
     },
 
-    requistPost(url, data) {
+    requestPost(url, data) {
         return axios
             .post(address(url), data, requestOptions())
             .then(res => responseData(res))

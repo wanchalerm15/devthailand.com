@@ -44,6 +44,11 @@ $navColor: #505050;
     height: $navHeight;
     background-color: white;
     box-shadow: 0 2px 3px rgba(0, 0, 0, .07);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 a {

@@ -1,7 +1,7 @@
 <template>
     <div id="app-admin">
         <NavbarAdmin></NavbarAdmin>
-        <div class="admin-wrapper" style="margin-top: 15px;">
+        <div class="admin-wrapper">
             <ActivityAdmin v-if="type ==  'activity'"></ActivityAdmin>
         </div>
     </div>
@@ -34,9 +34,11 @@ $mainColor: lightseagreen;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #f4f4f4;
+    background-color: #f2f2f2;
     overflow: auto;
+    font-size: 16px;
     padding-bottom: 68px;
+    padding-top: 75px;
     * {
         color: #505050;
     }
@@ -62,7 +64,14 @@ $mainColor: lightseagreen;
     .special {
         height: 40px;
         line-height: 40px;
+        &,
+        * {
+            color: white;
+        }
         background-color: $mainColor;
+        &.default {
+            background-color: dimgray;
+        }
     }
 
     form {
@@ -87,6 +96,9 @@ $mainColor: lightseagreen;
         thead th {
             background-color: $mainColor;
             color: white;
+            .fa {
+                color: white;
+            }
         }
     }
 }

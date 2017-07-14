@@ -28,11 +28,15 @@
                             </div>
     
                             <div class="group">
-                                <button type="submit" class="special fit">บันทึกข้อมูล</button>
+                                <button type="submit" class="special fit">
+                                    <i class="fa fa-save"></i> บันทึกข้อมูล
+                                </button>
                             </div>
     
                             <div class="group">
-                                <button @click="onReset()" type="button" class="special fit">ล้างข้อมูล</button>
+                                <button @click="onReset()" type="button" class="special fit default">
+                                    <i class="fa fa-refresh"></i> ล้างข้อมูล
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -45,7 +49,9 @@
                                     <th>หัวข้อ</th>
                                     <th>รายละเอียด</th>
                                     <th>รูปภาพ</th>
-                                    <th>จัดการ</th>
+                                    <th>
+                                        <i class="fa fa-cog"></i> จัดการ
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,7 +62,7 @@
                                         <a class="link" target="_blank" :href="item.image">ดูภาพ</a>
                                     </td>
                                     <td>
-                                        <a @click="form = item" class="link">แก้ไข</a>
+                                        <a @click="form = Object.assign({}, item)" class="link">แก้ไข</a>
                                         |
                                         <a @click="onDelete(item._id)" class="link">ลบ</a>
                                     </td>
@@ -102,12 +108,14 @@ export default {
             })
         },
         onInsert() {
-            http.requistPost(Url.Admin.Activity, this.form)
+            http.requestPost(Url.Admin.Activity, this.form)
                 .then(res => this.onReset())
                 .catch(res => this.setError(res.message));
         },
         onUpdate(id) {
-            console.log(id);
+            http.requestPut(`${Url.Admin.Activity}/${id}`, this.form)
+                .then(res => this.onReset())
+                .catch(res => this.setError(res.message));
         },
         onDelete(id) {
             if (confirm('ต้องการลบข้อมูลจริงหรือ?'))
@@ -136,6 +144,20 @@ export default {
 .c-body {
     width: 65%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

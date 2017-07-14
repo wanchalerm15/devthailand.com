@@ -32,7 +32,12 @@ Router.post(Url.Admin.Activity, (req, res) => {
         .catch(err => res.status(400).send(err));
 });
 Router.put(`${Url.Admin.Activity}/:id`, (req, res) => {
-    // coding here...
+    const id = req.params['id'] || 0;
+    req.body.updated = new Date();
+    Database.Activity
+        .findByIdAndUpdate(id, req.body)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
 });
 Router.delete(`${Url.Admin.Activity}/:id`, (req, res) => {
     const id = req.params['id'] || 0;
