@@ -2,7 +2,9 @@
     <div id="app-admin">
         <NavbarAdmin></NavbarAdmin>
         <div class="admin-wrapper">
+            <HomeAdmin v-if="type == 'home'"></HomeAdmin>
             <ActivityAdmin v-if="type ==  'activity'"></ActivityAdmin>
+            <PortfolioAdmin v-if="type == 'portfolio'"></PortfolioAdmin>
         </div>
     </div>
 </template>
@@ -10,12 +12,16 @@
 <script>
 import NavbarAdmin from './Navbar.vue';
 import ActivityAdmin from './Activity.vue';
+import PortfolioAdmin from './Portfolio.vue';
+import HomeAdmin from './Home.vue';
 
 export default {
     name: 'app-admin',
     components: {
         NavbarAdmin,
-        ActivityAdmin
+        ActivityAdmin,
+        PortfolioAdmin,
+        HomeAdmin
     },
     computed: {
         type() {
@@ -99,6 +105,15 @@ $mainColor: lightseagreen;
             .fa {
                 color: white;
             }
+        }
+    }
+
+    .header {
+        background-color: $mainColor;
+        padding: 5px 15px;
+        *,
+        & {
+            color: white;
         }
     }
 }

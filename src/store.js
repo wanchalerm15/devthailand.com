@@ -1,26 +1,37 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import http, { Url } from './http';
+import { setError } from './validate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        Activities: []
+        Activities: [],
+        Configs: {}
     },
     mutations: {
-        Activities(state) {
-            return http.requestGet(Url.Admin.Activity)
-                .then(res => state.Activities = res.data)
-                .catch(res => console.log(res));
+        Activities(state, payload) {
+            state.Activities = payload;
+        },
+        Configs(state, payload) {
+            state.Configs = payload;
         }
     },
     actions: {
         Activities({ commit }) {
-            commit('Activities');
+            return http.requestGet(Url.Admin.Activity)
+                .then(res => commit('Activities', res.data))
+                .catch(res => setError(res.message));
+        },
+        Configs({ commit }) {
+            return http.requestGet(Url.Config)
+                .then(res => commit('Configs', res.data))
+                .catch(res => setError(res.message));
         }
     },
     getters: {
-        Activities: state => state.Activities
+        Activities: state => state.Activities,
+        Configs: state => state.Configs
     }
 });

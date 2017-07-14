@@ -16,5 +16,8 @@ module.exports = {
     },
     Activities(findObject = {}) {
         return Database.Activity.find(findObject).sort({ updated: -1 });
+    },
+    Configs() {
+        return Database.Config.findOne();
     }
 }

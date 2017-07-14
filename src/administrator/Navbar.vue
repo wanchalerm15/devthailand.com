@@ -16,7 +16,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="Url.Home">
+                    <router-link :to="Url.Admin.Portfolio">
                         <i class="fa fa-graduation-cap"></i> ผลงาน
                     </router-link>
                 </li>

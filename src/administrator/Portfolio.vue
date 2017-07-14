@@ -1,9 +1,9 @@
 <template>
-    <div id="activity">
+    <div id="portfolio">
         <section class="admin-wrapper">
             <header>
                 <h1>
-                    <i class="fa fa-address-card-o"></i> จัดการกับข้อมูลกิจกรรม
+                    <i class="fa fa-address-card-o"></i> จัดการกับข้อมูลผลงาน
                 </h1>
             </header>
             <div class="admin-row">
@@ -80,7 +80,7 @@
 import http, { Url } from '../http';
 
 export default {
-    name: 'activity',
+    name: 'portfolio',
     data() {
         return {
             form: {
@@ -108,18 +108,18 @@ export default {
             })
         },
         onInsert() {
-            http.requestPost(Url.Admin.Activity, this.form)
+            http.requestPost(Url.Admin.Portfolio, this.form)
                 .then(res => this.onReset())
                 .catch(res => this.setError(res.message));
         },
         onUpdate(id) {
-            http.requestPut(`${Url.Admin.Activity}/${id}`, this.form)
+            http.requestPut(`${Url.Admin.Portfolio}/${id}`, this.form)
                 .then(res => this.onReset())
                 .catch(res => this.setError(res.message));
         },
         onDelete(id) {
             if (confirm('ต้องการลบข้อมูลจริงหรือ?'))
-                http.requestDelete(`${Url.Admin.Activity}/${id}`)
+                http.requestDelete(`${Url.Admin.Portfolio}/${id}`)
                     .then(res => this.onReset())
                     .catch(res => this.setError(res.message));
         },
@@ -130,7 +130,7 @@ export default {
     },
     computed: {
         activities() {
-            return this.$store.getters.Activities.filter(m => m.type == 1);
+            return this.$store.getters.Activities.filter(m => m.type == 2);
         }
     }
 }

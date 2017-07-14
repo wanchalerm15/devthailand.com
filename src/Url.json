@@ -4,7 +4,10 @@
     "Login": "/login",
     "Admin": {
         "Home": "/administrator",
-        "Activity": "/administrator/activity"
+        "Activity": "/administrator/activity",
+        "Portfolio": "/administrator/portfolio",
+        "Address": "/administrator/address"
     },
+    "Config": "/administrator/config",
     "Address": "http://localhost:9000"
 }
