@@ -1,6 +1,6 @@
 <template>
     <div id="address-admin">
-        <section class="admin-panel">
+        <section class="admin-panel" v-scroll>
             <header>
                 <h3 class="header">
                     <i class="fa fa-address-card"></i> แก้ไขข้อมูลที่อยู่ของฉัน
@@ -8,17 +8,17 @@
             </header>
             <div class="group">
                 <label for="address">ที่อยู่ติดต่อ :</label>
-                <textarea id="address" rows="4" class="input" @blur="onSubmit({address: form.address})" v-model="form.address"></textarea>
+                <textarea id="address" rows="4" class="input" @blur="onSubmit($event)" v-model="form.address"></textarea>
             </div>
     
             <div class="group">
                 <label for="email">ที่อยู่อีเมล์ :</label>
-                <input type="text" class="input" id="email" @blur="onSubmit({email: form.email})" v-model="form.email">
+                <input type="text" class="input" id="email" @blur="onSubmit($event)" v-model="form.email">
             </div>
     
             <div class="group">
                 <label for="phone">เบอร์โทรศัพท์ :</label>
-                <input type="text" class="input" id="phone" @blur="onSubmit({phone: form.phone})" v-model="form.phone">
+                <input type="text" class="input" id="phone" @blur="onSubmit($event)" v-model="form.phone">
             </div>
         </section>
     </div>
@@ -38,21 +38,16 @@ export default {
         }
     },
     created() {
-        this.onReload();
+        Object.assign(this.form, this.$store.getters.Configs);
     },
     methods: {
-        onSubmit(model) {
+        onSubmit(event) {
+            const element = event.currentTarget;
             const id = this.form._id;
+            const model = {};
+            model[element.id] = element.value;
             http.requestPost(Url.Admin.Address, { model, id })
-                .then(res => {
-                    if (!id) this.onReload();
-                })
                 .catch((err => this.setError(err.message)));
-        },
-        onReload() {
-            this.$store
-                .dispatch('Configs')
-                .then(() => this.form = Object.assign({}, this.$store.getters.Configs));
         }
     }
 }

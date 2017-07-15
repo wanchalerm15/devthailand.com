@@ -12,9 +12,24 @@ const ActivitySchema = mongoose.Schema({
 }, { versionKey: false });
 
 const ConfigSchema = mongoose.Schema({
+    // address
     address: { type: String },
     email: { type: String },
     phone: { type: String },
+    // social
+    twitter: { type: String },
+    facebook: { type: String },
+    instagram: { type: String },
+    google_plus: { type: String },
+    // index page
+    welcome_logo: { type: String },
+    welcome_head: { type: String },
+    welcome_detail: { type: String },
+    // about page
+    about_head: { type: String },
+    about_detail: { type: String },
+    about_content: { type: String },
+    // default datetime
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
 }, { versionKey: false });

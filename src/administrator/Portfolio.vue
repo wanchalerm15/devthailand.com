@@ -3,7 +3,7 @@
         <section class="admin-wrapper">
             <header>
                 <h1>
-                    <i class="fa fa-address-card-o"></i> จัดการกับข้อมูลผลงาน
+                    <i class="fa fa-graduation-cap"></i> จัดการกับข้อมูลผลงาน
                 </h1>
             </header>
             <div class="admin-row">

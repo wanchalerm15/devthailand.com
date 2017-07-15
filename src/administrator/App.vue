@@ -1,5 +1,5 @@
 <template>
-    <div id="app-admin">
+    <div id="app-admin" v-scroll>
         <NavbarAdmin></NavbarAdmin>
         <div class="admin-wrapper">
             <HomeAdmin v-if="type == 'home'"></HomeAdmin>
@@ -23,6 +23,11 @@ export default {
         PortfolioAdmin,
         HomeAdmin
     },
+    watch: {
+        '$route': function () {
+            $('#app-admin').scrollTop(0);
+        }
+    },
     computed: {
         type() {
             return this.$route.meta.type;
@@ -33,6 +38,7 @@ export default {
 
 <style lang="scss">
 $mainColor: lightseagreen;
+$mainPadding: 10px;
 
 #app-admin {
     position: fixed;
@@ -130,13 +136,25 @@ $mainColor: lightseagreen;
     border-radius: 2px;
 }
 
+.scroll {
+    .admin-panel {
+        overflow-y: scroll;
+        height: 400px;
+    }
+}
+
 .admin-row {
-    margin-left: -15px;
-    margin-right: -15px;
+    margin-left: -$mainPadding;
+    margin-right: -$mainPadding;
     .admin-columns {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: $mainPadding;
+        padding-right: $mainPadding;
         float: left;
+    }
+    &:after {
+        content: '';
+        display: block;
+        clear: left;
     }
 }
 </style>
