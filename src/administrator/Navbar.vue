@@ -16,9 +16,14 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="Url.Admin.Portfolio">
-                        <i class="fa fa-graduation-cap"></i> ผลงาน
+                    <router-link :to="Url.Admin.Contact">
+                        <i class="fa fa-envelope-o"></i> ข้อความ
                     </router-link>
+                </li>
+                <li>
+                    <a :href="Url.Login" @click="onLogout()">
+                        <i class="fa fa-sign-out"></i> ออกจากระบบ
+                    </a>
                 </li>
             </ul>
         </div>
@@ -26,12 +31,17 @@
 </template>
 
 <script>
-import { Url } from '../http';
+import { Url, Session } from '../http';
 export default {
     name: 'navbar-admin',
     data() {
         return {
             Url
+        }
+    },
+    methods: {
+        onLogout() {
+            Session.devAuthen(false);
         }
     }
 }

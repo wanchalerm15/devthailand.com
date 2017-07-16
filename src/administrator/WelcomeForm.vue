@@ -1,6 +1,6 @@
 <template>
     <div id="welcome-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-home"></i> เนื้อหาหน้าแรก

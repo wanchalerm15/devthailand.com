@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         Activities: [],
-        Configs: {}
+        Configs: {},
+        Contacts: []
     },
     mutations: {
         Activities(state, payload) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
         },
         Configs(state, payload) {
             state.Configs = payload;
+        },
+        Contacts(state, payload) {
+            state.Contacts = payload;
         }
     },
     actions: {
@@ -28,10 +32,16 @@ export default new Vuex.Store({
             return http.requestGet(Url.Config)
                 .then(res => commit('Configs', res.data))
                 .catch(res => setError(res.message));
+        },
+        Contacts({ commit }) {
+            return http.requestGet(Url.Admin.Contact)
+                .then(res => commit('Contacts', res.data))
+                .catch(res => this.setError(res.message));
         }
     },
     getters: {
         Activities: state => state.Activities,
-        Configs: state => state.Configs
+        Configs: state => state.Configs,
+        Contacts: state => state.Contacts
     }
 });

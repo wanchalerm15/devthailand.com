@@ -15,7 +15,7 @@
             <router-view></router-view>
         </div>
         <!-- Notification -->
-        <div id="error">error please try again มีบางอย่างผิดพลาดเกิดขึ้น</div>
+        <div id="error"></div>
     </div>
 </template>
 
@@ -96,5 +96,20 @@ export default {
     text-align: center;
     text-transform: capitalize;
     font-weight: bold;
+    &.success {
+        background-color: lightgreen;
+        color: darkgreen;
+    }
+}
+
+.text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+}
+
+.text-center {
+    text-align: center;
 }
 </style>

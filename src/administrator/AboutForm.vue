@@ -1,6 +1,6 @@
 <template>
     <div id="about-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-info-circle"></i> เนื้อหาหน้าเกี่ยวกับเรา

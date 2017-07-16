@@ -14,12 +14,19 @@ Vue.mixin({
             model[element.id] = element.value;
             http.requestPost(Url.Admin.Address, { model, id })
                 .catch((err => this.setError(err.message)));
+        },
+        limitBy(array, lenght) {
+            return array.slice(0, lenght);
         }
     }
 });
 
+Vue.filter('subString', (value, parameter) => {
+    return value.length <= parameter ? value : value.substr(0, parameter) + ' [...] ';
+});
 
-export function setError(error_message) {
+
+export function setError(error_message, type = false) {
     // default error validate
     if (error_message === 'validate') {
         const errors = this.errors.all();
@@ -31,6 +38,8 @@ export function setError(error_message) {
             const errorElement = $('#error');
             if (errorElement.length == 0) return;
             clearTimeout(window.setErrorTimeout);
+            errorElement.removeClass('success');
+            if (type) errorElement.addClass('success');
             if (error_message != null) {
                 errorElement.html(error_message);
                 errorElement.fadeIn();

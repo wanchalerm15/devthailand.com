@@ -2379,6 +2379,9 @@
 				margin: 2.5em 0 0 0;
 				padding: 0 0 0 3.25em;
 				position: relative;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
 			}
 
 				ul.contact li:before {
@@ -3331,6 +3334,7 @@
 
 		.wrapper.style3 {
 			background-color: #3d4051;
+			border-bottom: solid 1px #3f4e85;
 		}
 
 			.wrapper.style3:before, .wrapper.style3:after {

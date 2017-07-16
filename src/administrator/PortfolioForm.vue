@@ -1,6 +1,6 @@
 <template>
     <div id="portfolio-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-graduation-cap"></i> แก้ไขข้อมูลผลงาน

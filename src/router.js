@@ -17,7 +17,7 @@ const router = new VueRouter({
 
         { path: Url.Admin.Home, component: AdminHomeComponent, meta: { auth: true, type: "home" } },
         { path: Url.Admin.Activity, component: AdminHomeComponent, meta: { auth: true, type: 'activity' } },
-        { path: Url.Admin.Portfolio, component: AdminHomeComponent, meta: { auth: true, type: 'portfolio' } },
+        { path: Url.Admin.Contact, component: AdminHomeComponent, meta: { auth: true, type: 'contact' } },
 
         { path: '*', redirect: Url.Home }
     ]

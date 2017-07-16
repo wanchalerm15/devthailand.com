@@ -5,9 +5,10 @@
     "Admin": {
         "Home": "/administrator",
         "Activity": "/administrator/activity",
-        "Portfolio": "/administrator/portfolio",
-        "Address": "/administrator/address"
+        "Address": "/administrator/address",
+        "Contact": "/administrator/contact"
     },
     "Config": "/administrator/config",
+    "Contact": "/contact/message",
     "Address": "http://localhost:9000"
 }

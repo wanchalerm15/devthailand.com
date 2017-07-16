@@ -19,5 +19,8 @@ module.exports = {
     },
     Configs() {
         return Database.Config.findOne();
+    },
+    Contacts(findObject = {}) {
+        return Database.Message.find(findObject).sort({ updated: -1 });
     }
 }

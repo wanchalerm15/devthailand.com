@@ -1,6 +1,6 @@
 <template>
     <div id="contact-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-info-circle"></i> แก้ไขเนื้อหาติดต่อเรา

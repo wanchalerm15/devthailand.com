@@ -1,10 +1,10 @@
 <template>
-    <div id="app-admin" v-scroll>
+    <div id="app-admin">
         <NavbarAdmin></NavbarAdmin>
         <div class="admin-wrapper">
             <HomeAdmin v-if="type == 'home'"></HomeAdmin>
             <ActivityAdmin v-if="type ==  'activity'"></ActivityAdmin>
-            <PortfolioAdmin v-if="type == 'portfolio'"></PortfolioAdmin>
+            <ContactAdmin v-if="type == 'contact'"></ContactAdmin>
         </div>
     </div>
 </template>
@@ -12,7 +12,7 @@
 <script>
 import NavbarAdmin from './Navbar.vue';
 import ActivityAdmin from './Activity.vue';
-import PortfolioAdmin from './Portfolio.vue';
+import ContactAdmin from './Contact.vue';
 import HomeAdmin from './Home.vue';
 
 export default {
@@ -20,13 +20,8 @@ export default {
     components: {
         NavbarAdmin,
         ActivityAdmin,
-        PortfolioAdmin,
+        ContactAdmin,
         HomeAdmin
-    },
-    watch: {
-        '$route': function () {
-            $('#app-admin').scrollTop(0);
-        }
     },
     computed: {
         type() {
@@ -66,6 +61,7 @@ $mainPadding: 10px;
 
     textarea.input {
         height: auto;
+        max-width: 100%;
     }
 
     .error {
@@ -134,13 +130,6 @@ $mainPadding: 10px;
     padding: 15px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, .07);
     border-radius: 2px;
-}
-
-.scroll {
-    .admin-panel {
-        overflow-y: scroll;
-        height: 400px;
-    }
 }
 
 .admin-row {

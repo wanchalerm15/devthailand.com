@@ -66,7 +66,7 @@ export default {
             this.$validator.validateAll().then(valid => {
                 if (!valid)
                     return this.setError('validate');
-                http.requistPost(Url.Login, this.form)
+                http.requestPost(Url.Login, this.form)
                     .then(res => {
                         Session.devAuthen(res.data.token);
                         this.$router.push(Url.Admin.Home);

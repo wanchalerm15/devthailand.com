@@ -1,6 +1,6 @@
 <template>
     <div id="address-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-address-card"></i> แก้ไขข้อมูลที่อยู่ของฉัน

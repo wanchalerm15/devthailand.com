@@ -1,6 +1,6 @@
 <template>
     <div id="social-admin">
-        <section class="admin-panel" v-scroll>
+        <section class="admin-panel">
             <header>
                 <h3 class="header">
                     <i class="fa fa-share-o"></i> แก้ไขข้อมูลโซเชียลเน็ตเวิร์ค

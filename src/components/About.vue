@@ -17,21 +17,24 @@
                 <div v-html="configs.portfolio_detail"></div>
     
                 <section class="features">
-                    <article>
+                    <article v-for="(item, index) in limitBy(activities, 2)" :key="item">
                         <a href="#" class="image">
-                            <img src="/src/images/pic04.jpg" alt="" />
+                            <img :src="item.image" alt="item.topic" class="image-portfolio" />
                         </a>
-                        <h3 class="major">Sed feugiat lorem</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">Learn more</a>
-                    </article>
-                    <article>
-                        <a href="#" class="image">
-                            <img src="/src/images/pic05.jpg" alt="" />
-                        </a>
-                        <h3 class="major">Nisl placerat</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                        <a href="#" class="special">Learn more</a>
+                        <h3 class="major">
+                            {{ item.topic }}
+                        </h3>
+    
+                        <template v-if="activityDetail !== index">
+                            <p>{{ item.body | subString(100) }}</p>
+                            <a @click.self="activityDetail = index" class="special">ดูรายละเอียดเพิ่มเติม</a>
+                        </template>
+    
+                        <template v-if="activityDetail === index">
+                            <p>{{ item.body }}</p>
+                            <a @click.self="activityDetail = null" class="special">ซ่อนรายละเอียด</a>
+                        </template>
+    
                     </article>
                 </section>
             </div>
@@ -42,15 +45,28 @@
 <script>
 export default {
     name: 'about',
+    data() {
+        return {
+            activityDetail: null
+        }
+    },
+    created() {
+        this.$store.dispatch('Activities');
+    },
     computed: {
         configs() {
             return this.$store.getters.Configs;
+        },
+        activities() {
+            return this.$store.getters.Activities;
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+a {
+    cursor: pointer;
+}
 </style>
 

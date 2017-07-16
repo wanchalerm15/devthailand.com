@@ -1,5 +1,5 @@
 <template>
-    <div id="admin-home" class="scroll" v-if="loaded">
+    <div id="admin-home" v-if="loaded">
         <h1>
             <i class="fa fa-home"></i> จัดการข้อมูลแต่ละหน้าของเว็บไซต์
         </h1>
@@ -25,9 +25,21 @@
             </div>
         </div>
     
-        <div class="admin-row row-1">
+        <div class="admin-row row-3">
             <div class="admin-columns">
                 <ContactForm></ContactForm>
+            </div>
+            <div class="admin-columns">
+                <ActivityForm type="1"></ActivityForm>
+            </div>
+        </div>
+    
+        <div class="admin-row row-4">
+            <div class="admin-columns">
+                <ActivityForm type="2"></ActivityForm>
+            </div>
+            <div class="admin-columns">
+                <ActivityForm type="3"></ActivityForm>
             </div>
         </div>
     </div>
@@ -40,6 +52,7 @@ import WelcomeForm from './WelcomeForm.vue';
 import AboutForm from './AboutForm.vue';
 import PortfolioForm from './PortfolioForm.vue';
 import ContactForm from './ContactForm.vue';
+import ActivityForm from './ActivityForm.vue';
 
 export default {
     name: 'admin-home',
@@ -49,7 +62,8 @@ export default {
         WelcomeForm,
         AboutForm,
         PortfolioForm,
-        ContactForm
+        ContactForm,
+        ActivityForm
     },
     data() {
         return {
@@ -59,7 +73,25 @@ export default {
     created() {
         this.$store
             .dispatch('Configs')
-            .then(() => this.loaded = true);
+            .then(() => {
+                this.loaded = true;
+                this.processHeightColumns();
+            });
+    },
+    methods: {
+        processHeightColumns() {
+            setTimeout(() => {
+                $('.admin-row').each((row_index, row) => {
+                    const columns = $(row).find('.admin-columns');
+                    let height = 0;
+                    columns.each((col_index, col) => {
+                        if (col.offsetHeight > height)
+                            height = col.offsetHeight;
+                    });
+                    $(columns).find('.admin-panel').css('min-height', `${height}px`);
+                });
+            }, 0);
+        }
     }
 }
 </script>
@@ -79,6 +111,21 @@ export default {
     }
     >.admin-columns:last-child {
         width: 33.333333333333%;
+    }
+}
+
+.row-3 {
+    >.admin-columns:first-child {
+        width: 33.333333333333%;
+    }
+    >.admin-columns:last-child {
+        width: 66.666666666666%;
+    }
+}
+
+.row-4 {
+    >.admin-columns {
+        width: 50%;
     }
 }
 </style>

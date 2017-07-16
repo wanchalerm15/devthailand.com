@@ -26,7 +26,6 @@ Router.get(Url.Admin.Activity, (req, res) => {
         .catch(err => res.status(400).send(err));
 });
 Router.post(Url.Admin.Activity, (req, res) => {
-    req.body.type = 1;
     new Database.Activity(req.body)
         .save()
         .then(data => res.status(200).send(data))
@@ -35,43 +34,12 @@ Router.post(Url.Admin.Activity, (req, res) => {
 Router.put(`${Url.Admin.Activity}/:id`, (req, res) => {
     const id = req.params['id'] || 0;
     req.body.updated = new Date();
-    req.body.type = 1;
     Database.Activity
         .findByIdAndUpdate(id, req.body)
         .then(data => res.status(200).send(data))
         .catch(err => res.status(400).send(err));
 });
 Router.delete(`${Url.Admin.Activity}/:id`, (req, res) => {
-    const id = req.params['id'] || 0;
-    Database.Activity
-        .findByIdAndRemove(id)
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(400).send(err));
-});
-
-// Portfolio 
-Router.get(Url.Admin.Portfolio, (req, res) => {
-    Store.Activities()
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(400).send(err));
-});
-Router.post(Url.Admin.Portfolio, (req, res) => {
-    req.body.type = 2;
-    new Database.Activity(req.body)
-        .save()
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(400).send(err));
-});
-Router.put(`${Url.Admin.Portfolio}/:id`, (req, res) => {
-    const id = req.params['id'] || 0;
-    req.body.updated = new Date();
-    req.body.type = 2;
-    Database.Activity
-        .findByIdAndUpdate(id, req.body)
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(400).send(err));
-});
-Router.delete(`${Url.Admin.Portfolio}/:id`, (req, res) => {
     const id = req.params['id'] || 0;
     Database.Activity
         .findByIdAndRemove(id)
@@ -106,4 +74,16 @@ Router.post(Url.Admin.Address, (req, res) => {
     }
 });
 
+// Contact send message
+Router.post(Url.Contact, (req, res) => {
+    new Database.Message(req.body)
+        .save()
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
+});
+Router.get(Url.Admin.Contact, (req, res) => {
+    Store.Contacts()
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(400).send(err));
+});
 module.exports = Router;
