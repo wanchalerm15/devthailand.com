@@ -17,11 +17,18 @@
                 <div class="admin-columns">
                     <div class="group">
                         <label for="about_detail">
-                            รายละเอียดตอนรับ
+                            รายละเอียดต้อนรับ
                         </label>
                         <textarea type="text" class="input" id="about_detail" v-model="form.about_detail" @blur="onSubmit($event)" rows="2"></textarea>
                     </div>
                 </div>
+            </div>
+    
+            <div class="group">
+                <label for="about_title">
+                    หัวข้อของหน้า
+                </label>
+                <input type="text" class="input" id="about_title" v-model="form.about_title" @blur="onSubmit($event)">
             </div>
     
             <div class="group">
@@ -42,7 +49,9 @@ export default {
         return {
             form: {
                 about_head: null,
-                about_detail: null
+                about_detail: null,
+                about_title: null,
+                about_content: null
             }
         }
     },

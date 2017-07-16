@@ -28,7 +28,14 @@ const ConfigSchema = mongoose.Schema({
     // about page
     about_head: { type: String },
     about_detail: { type: String },
+    about_title: { type: String },
     about_content: { type: String },
+    // portfolio content
+    portfolio_title: { type: String },
+    portfolio_detail: { type: String },
+    // contact content
+    contact_title: { type: String },
+    contact_detail: { type: String },
     // default datetime
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }

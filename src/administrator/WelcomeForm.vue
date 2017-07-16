@@ -25,7 +25,7 @@
     
             <div class="group">
                 <label for="welcome_detail">
-                    รายละเอียดตอนรับ
+                    รายละเอียดต้อนรับ
                 </label>
                 <textarea type="text" class="input" id="welcome_detail" v-model="form.welcome_detail" @blur="onSubmit($event)" rows="3"></textarea>
             </div>

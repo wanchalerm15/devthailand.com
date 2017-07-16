@@ -1,9 +1,9 @@
 <template>
     <header id="header" :class="headerClass">
         <h1>
-            <router-link :to="Url.Home">
+            <a :href="Url.Home">
                 <i class="fa fa-code"></i> devthailand.com
-            </router-link>
+            </a>
         </h1>
         <nav>
             <a href="#menu">เมนูเว็บไซต์</a>
@@ -17,14 +17,13 @@ import { Url } from '../http';
 export default {
     name: 'header',
     data() {
-        return { Url }
+        return {
+            Url
+        }
     },
-    props: {
-        headerClass: {
-            type: String,
-            default() {
-                return Url.Home == this.$route.path ? 'alt' : ''
-            }
+    computed: {
+        headerClass() {
+            return Url.Home == this.$route.path ? 'alt' : ''
         }
     }
 }

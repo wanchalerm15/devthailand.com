@@ -1,51 +1,54 @@
 <template>
     <section id="footer">
         <div class="inner">
-            <h2 class="major">Get in touch</h2>
-            <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+    
+            <h2 class="major">{{ configs.contact_title }}</h2>
+            <div v-html="configs.contact_detail"></div>
+    
             <form method="post" action="#">
                 <div class="field">
-                    <label for="name">Name</label>
+                    <label for="name">ชื่อและนามสกุล :</label>
                     <input type="text" name="name" id="name" />
                 </div>
                 <div class="field">
-                    <label for="email">Email</label>
+                    <label for="email">ที่อยู่อีเมล์ :</label>
                     <input type="email" name="email" id="email" />
                 </div>
                 <div class="field">
-                    <label for="message">Message</label>
+                    <label for="message">ข้อความ :</label>
                     <textarea name="message" id="message" rows="4"></textarea>
                 </div>
                 <ul class="actions">
                     <li>
-                        <input type="submit" value="Send Message" />
+                        <button type="submit">
+                            <i class="fa fa-send"></i> ส่งข้อความ
+                        </button>
                     </li>
                 </ul>
             </form>
             <ul class="contact">
-                <li class="fa-home">
-                    Untitled Inc
-                    <br /> 1234 Somewhere Road Suite #2894
-                    <br /> Nashville, TN 00000-0000
+                <li class="fa-home" v-html="configs.address"></li>
+                <li class="fa-phone">
+                    <a :href="`tel:${configs.phone}`" target="_blank">{{ configs.phone }}</a>
                 </li>
-                <li class="fa-phone">(000) 000-0000</li>
                 <li class="fa-envelope">
-                    <a href="#">information@untitled.tld</a>
+                    <a :href="`mailTo:${configs.email}`" target="_blank">{{ configs.email }}</a>
                 </li>
                 <li class="fa-twitter">
-                    <a href="#">twitter.com/untitled-tld</a>
+                    <a :href="configs.twitter" target="_blank">{{ configs.twitter }}</a>
                 </li>
                 <li class="fa-facebook">
-                    <a href="#">facebook.com/untitled-tld</a>
+                    <a :href="configs.facebook" target="_blank">{{ configs.facebook }}</a>
                 </li>
                 <li class="fa-instagram">
-                    <a href="#">instagram.com/untitled-tld</a>
+                    <a :href="configs.instagram" target="_blank">{{ configs.instagram }}</a>
                 </li>
             </ul>
             <ul class="copyright">
-                <li>&copy; Untitled Inc. All rights reserved.</li>
-                <li>Design:
-                    <a href="http://html5up.net">HTML5 UP</a>
+                <li>&copy; Copyright all 2017</li>
+                <li>
+                    Website :
+                    <a href="http://devthailand.com">devthailand.com</a>
                 </li>
             </ul>
         </div>
@@ -54,7 +57,12 @@
 
 <script>
 export default {
-    name: 'footer'
+    name: 'footer',
+    computed: {
+        configs() {
+            return this.$store.getters.Configs;
+        }
+    }
 }
 </script>
 

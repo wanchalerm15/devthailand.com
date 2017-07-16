@@ -2,21 +2,19 @@
     <div id="about">
         <header>
             <div class="inner">
-                <h2>Generic</h2>
-                <p>Phasellus non pulvinar erat. Fusce tincidunt nisl eget ipsum.</p>
+                <h2>{{ configs.about_head }}</h2>
+                <p>{{ configs.about_detail }}</p>
             </div>
         </header>
     
         <div class="wrapper">
             <div class="inner">
     
-                <h3 class="major">Lorem ipsum dolor</h3>
-                <p>Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien.</p>
+                <h3 class="major">{{ configs.about_title }}</h3>
+                <div v-html="configs.about_content"></div>
     
-                <p>Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
-    
-                <h3 class="major">Vitae phasellus</h3>
-                <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+                <h3 class="major">{{ configs.portfolio_title }}</h3>
+                <div v-html="configs.portfolio_detail"></div>
     
                 <section class="features">
                     <article>
@@ -43,7 +41,12 @@
 
 <script>
 export default {
-    name: 'about'
+    name: 'about',
+    computed: {
+        configs() {
+            return this.$store.getters.Configs;
+        }
+    }
 }
 </script>
 
