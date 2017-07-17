@@ -32,7 +32,7 @@
         <section id="three" class="wrapper spotlight style3">
             <div class="inner">
                 <a href="#" class="image" v-if="configs.activity_image3">
-                    <img :src="configs.activity_image3" alt="configs.activity_title1" />
+                    <img :src="configs.activity_image3" :alt="configs.activity_title1" />
                 </a>
                 <div class="content">
                     <h2 class="major">{{ configs.activity_title3 }}</h2>
@@ -52,7 +52,7 @@
                 <section class="features">
                     <article v-for="(item, index) of limitBy(activities, limit)" :key="item._id">
                         <a href="#" class="image">
-                            <img :src="item.image" alt="item.topic" class="image-portfolio" />
+                            <img :src="item.image" :alt="item.topic" class="image-portfolio" />
                         </a>
                         <h3 class="major">
                             {{ item.topic }}

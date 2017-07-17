@@ -13,9 +13,14 @@
                         เกี่ยวกับฉัน
                     </a>
                 </li>
-                <li>
+                <li v-if="!isAuthentication">
                     <a :href="Url.Login">
                         เข้าสู่ระบบ
+                    </a>
+                </li>
+                <li v-if="isAuthentication">
+                    <a :href="Url.Admin.Home">
+                        ผู้ดูแลระบบ
                     </a>
                 </li>
             </ul>
@@ -25,14 +30,18 @@
 </template>
 
 <script>
-import { Url } from '../http';
+import { Url, Session } from '../http';
 
 export default {
     name: 'menu',
     data() {
         return {
-            Url
+            Url,
+            isAuthentication: null
         }
+    },
+    mounted() {
+        this.isAuthentication = Session.devAuthen();
     }
 }
 </script>

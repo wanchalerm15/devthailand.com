@@ -5,7 +5,7 @@
             <HeaderElement></HeaderElement>
             <MenuElement></MenuElement>
             <BannerElement v-if="showBanner"></BannerElement>
-            <section id="wrapper" v-if="isLoaded">
+            <section id="wrapper">
                 <router-view></router-view>
             </section>
             <FooterElement></FooterElement>
@@ -28,11 +28,6 @@ import { Url } from '../http';
 
 export default {
     name: 'app',
-    data() {
-        return {
-            isLoaded: false
-        }
-    },
     components: {
         HeaderElement,
         MenuElement,
@@ -40,8 +35,7 @@ export default {
         FooterElement
     },
     created() {
-        this.$store.dispatch('Configs')
-            .then(() => this.isLoaded = true);
+        this.$store.dispatch('Configs');
     },
     computed: {
         showBanner() {

@@ -81,15 +81,18 @@ export default {
     methods: {
         processHeightColumns() {
             setTimeout(() => {
-                $('.admin-row').each((row_index, row) => {
-                    const columns = $(row).find('.admin-columns');
-                    let height = 0;
-                    columns.each((col_index, col) => {
-                        if (col.offsetHeight > height)
-                            height = col.offsetHeight;
+                try {
+                    $('.admin-row').each((row_index, row) => {
+                        const columns = $(row).find('.admin-columns');
+                        let height = 0;
+                        columns.each((col_index, col) => {
+                            if (col.offsetHeight > height)
+                                height = col.offsetHeight;
+                        });
+                        $(columns).find('.admin-panel').css('min-height', `${height}px`);
                     });
-                    $(columns).find('.admin-panel').css('min-height', `${height}px`);
-                });
+                }
+                catch (e) { }
             }, 0);
         }
     }

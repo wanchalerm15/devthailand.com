@@ -5,7 +5,7 @@ import AboutComponent from './components/About.vue';
 import LoginComponent from './components/Login.vue';
 import AdminHomeComponent from './administrator/App.vue';
 import Url from './Url.json';
-import Session from './session';
+import Session, { storage } from './session';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -13,30 +13,14 @@ const router = new VueRouter({
     routes: [
         { path: Url.Home, component: HomeComponent },
         { path: Url.About, component: AboutComponent },
-        { path: Url.Login, component: LoginComponent, meta: { auth: false } },
+        { path: Url.Login, component: LoginComponent },
 
-        { path: Url.Admin.Home, component: AdminHomeComponent, meta: { auth: true, type: "home" } },
-        { path: Url.Admin.Activity, component: AdminHomeComponent, meta: { auth: true, type: 'activity' } },
-        { path: Url.Admin.Contact, component: AdminHomeComponent, meta: { auth: true, type: 'contact' } },
+        { path: Url.Admin.Home, component: AdminHomeComponent, meta: { type: "home" } },
+        { path: Url.Admin.Activity, component: AdminHomeComponent, meta: { type: 'activity' } },
+        { path: Url.Admin.Contact, component: AdminHomeComponent, meta: { type: 'contact' } },
 
         { path: '*', redirect: Url.Home }
     ]
-});
-
-router.beforeEach((to, from, next) => {
-    const devAuthen = Session.devAuthen();
-    // administrator
-    if (to.meta.auth === true && !devAuthen) {
-        next(Url.Login);
-    }
-    // login
-    else if (to.meta.auth === false && devAuthen) {
-        next(Url.Admin.Home);
-    }
-    // no action
-    else {
-        next();
-    }
 });
 
 export default router;

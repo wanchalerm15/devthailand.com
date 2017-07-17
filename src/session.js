@@ -11,7 +11,7 @@ export default {
     }
 }
 
-function storage() {
+export function storage() {
     try {
         if (!localStorage) return;
         return localStorage;

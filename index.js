@@ -12,11 +12,11 @@ app.use(require('cors')());
 app.use(bodyParser.json());
 app.use('/dist', express.static(__dirname + '/dist'));
 app.use('/src/assets', express.static(__dirname + '/src/assets'));
+app.use('/src/images', express.static(__dirname + '/src/images'));
 
 app.use('/api', require('./server/router'));
-app.get('*', (req, res) => {
-    Store.Activities()
-        .then(() => Store.Configs())
+app.get('**', (req, res) => {
+    Store.Activities().then(() => Store.Configs())
         .then(() => {
             const context = {
                 url: req.path,

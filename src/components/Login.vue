@@ -61,6 +61,10 @@ export default {
             }
         }
     },
+    mounted() {
+        if (Session.devAuthen())
+            this.$router.push(Url.Admin.Home);
+    },
     methods: {
         onSubmit() {
             this.$validator.validateAll().then(valid => {

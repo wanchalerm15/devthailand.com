@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { Session, Url } from '../http';
 import NavbarAdmin from './Navbar.vue';
 import ActivityAdmin from './Activity.vue';
 import ContactAdmin from './Contact.vue';
@@ -27,7 +28,11 @@ export default {
         type() {
             return this.$route.meta.type;
         }
-    }
+    },
+    mounted() {
+        if (!Session.devAuthen())
+            this.$router.push(Url.Login);
+    },
 }
 </script>
 
