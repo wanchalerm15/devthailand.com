@@ -1,4 +1,9 @@
 const Database = require('./database');
+const State = {
+    Activities: [],
+    Configs: {},
+    Contacts: []
+};
 module.exports = {
     SuperUsers() {
         const Users = [{
@@ -15,12 +20,18 @@ module.exports = {
         return Users;
     },
     Activities(findObject = {}) {
-        return Database.Activity.find(findObject).sort({ updated: -1 });
+        return Database.Activity
+            .find(findObject)
+            .sort({ updated: -1 })
+            .then(Activities => State['Activities'] = Activities);
     },
     Configs() {
-        return Database.Config.findOne();
+        return Database.Config
+            .findOne()
+            .then(Configs => State['Configs'] = Configs);;
     },
     Contacts(findObject = {}) {
         return Database.Message.find(findObject).sort({ updated: -1 });
-    }
+    },
+    State: State
 }

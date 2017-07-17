@@ -2,6 +2,7 @@ export default {
     devAuthen(token = null) {
         const _key = 'DevAuthen';
         const _storage = storage();
+        if (!_storage) return null;
         if (token === false)
             return _storage.removeItem(_key);
         if (token)
