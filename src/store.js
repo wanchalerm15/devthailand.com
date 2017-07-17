@@ -40,8 +40,8 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        Activities: state => state.Activities,
-        Configs: state => state.Configs,
-        Contacts: state => state.Contacts
+        Activities: state => state.Activities || [],
+        Configs: state => state.Configs || {},
+        Contacts: state => state.Contacts || []
     }
 });
