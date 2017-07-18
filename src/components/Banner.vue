@@ -29,3 +29,12 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+@media screen and (min-width: 1200px) {
+    #banner .logo img {
+        width: 150px;
+        height: 150px;
+    }
+}
+</style>

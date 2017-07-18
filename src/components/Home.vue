@@ -117,4 +117,14 @@ a {
 .alt.style1 {
     border-bottom: solid 1px #2e3141;
 }
+
+.spotlight {
+    font-family: "Prompt";
+    p {
+        font-weight: 200;
+    }
+    .special {
+        font-weight: normal;
+    }
+}
 </style>

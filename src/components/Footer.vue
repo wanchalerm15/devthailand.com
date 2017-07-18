@@ -104,6 +104,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul.contact li {
+    white-space: normal;
+}
 
+@media screen and (max-width: 767px) {
+    ul.contact li {
+        white-space: nowrap;
+    }
+}
 </style>
 
