@@ -68,5 +68,12 @@ export default {
 a {
     cursor: pointer;
 }
+
+#about {
+    font-family: 'Prompt';
+    .inner {
+        font-weight: 200;
+    }
+}
 </style>
 

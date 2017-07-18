@@ -7,7 +7,7 @@
             <h2>{{ configs.welcome_head }}</h2>
             <p class="thaifont">
                 {{ configs.welcome_detail }}
-                <router-link :to="Url.About">ข้อมูลเพิ่มเติม</router-link>
+                <a :href="Url.About">ข้อมูลเพิ่มเติม</a>
             </p>
         </div>
     </section>
