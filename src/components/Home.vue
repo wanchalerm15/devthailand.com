@@ -59,18 +59,18 @@
                         </h3>
     
                         <template v-if="activityDetail !== index">
-                            <p>{{ item.body | subString(100) }}</p>
+                            <p class="details">{{ item.body | subString(100) }}</p>
                             <a @click.self="activityDetail = index" class="special">ดูรายละเอียดเพิ่มเติม</a>
                         </template>
     
                         <template v-if="activityDetail === index">
-                            <p>{{ item.body }}</p>
+                            <p class="details">{{ item.body }}</p>
                             <a @click.self="activityDetail = null" class="special">ซ่อนรายละเอียด</a>
                         </template>
     
                     </article>
                 </section>
-                <ul class="actions">
+                <ul class="actions" v-if="activities.length > 4">
                     <li>
                         <a @click="limit = activities.length" class="button" v-if="limit == 4">ดูกิจกรรมทั้งหมด</a>
                         <a @click="limit = 4" class="button" v-if="limit != 4">ซ่อนกิจกรรม</a>
@@ -118,13 +118,8 @@ a {
     border-bottom: solid 1px #2e3141;
 }
 
-.spotlight {
-    font-family: "Prompt";
-    p {
-        font-weight: 200;
-    }
-    .special {
-        font-weight: normal;
-    }
+.spotlight p,
+.details {
+    line-height: 2.23rem;
 }
 </style>

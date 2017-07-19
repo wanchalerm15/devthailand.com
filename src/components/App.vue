@@ -77,6 +77,30 @@ export default {
     .group-btn {
         margin-top: 30px;
     }
+    .inner,
+    label,
+    button,
+    .inner h1,
+    .inner h2,
+    .inner h3,
+    .inner h4,
+    .inner p,
+    a.special,
+    nav a {
+        font-family: "Source Sans Pro", "Prompt", Helvetica, sans-serif;
+    }
+    .inner h1,
+    .inner h2,
+    .inner h3,
+    .inner h4 {
+        font-weight: 600;
+    }
+    nav a {
+        font-weight: 500;
+    }
+    a.special {
+        font-weight: 400;
+    }
 }
 
 #error {

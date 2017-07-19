@@ -37,11 +37,11 @@
             </form>
             <ul class="contact">
                 <li class="fa-home" v-html="configs.address"></li>
-                <li class="fa-phone">
-                    <a :href="`tel:${configs.phone}`" target="_blank">{{ configs.phone }}</a>
-                </li>
                 <li class="fa-envelope">
                     <a :href="`mailTo:${configs.email}`" target="_blank">{{ configs.email }}</a>
+                </li>
+                <li class="fa-google-plus">
+                    <a :href="`${configs.google_plus}`" target="_blank">{{ configs.google_plus }}</a>
                 </li>
                 <li class="fa-twitter">
                     <a :href="configs.twitter" target="_blank">{{ configs.twitter }}</a>

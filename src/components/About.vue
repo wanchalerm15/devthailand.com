@@ -11,7 +11,7 @@
             <div class="inner">
     
                 <h3 class="major">{{ configs.about_title }}</h3>
-                <div v-html="configs.about_content"></div>
+                <div class="details" v-html="configs.about_content"></div>
     
                 <h3 class="major">{{ configs.portfolio_title }}</h3>
                 <div v-html="configs.portfolio_detail"></div>
@@ -26,12 +26,12 @@
                         </h3>
     
                         <template v-if="activityDetail !== index">
-                            <p>{{ item.body | subString(100) }}</p>
+                            <p class="ac-detail">{{ item.body | subString(100) }}</p>
                             <a @click.self="activityDetail = index" class="special">ดูรายละเอียดเพิ่มเติม</a>
                         </template>
     
                         <template v-if="activityDetail === index">
-                            <p>{{ item.body }}</p>
+                            <p class="ac-detail">{{ item.body }}</p>
                             <a @click.self="activityDetail = null" class="special">ซ่อนรายละเอียด</a>
                         </template>
     
@@ -69,11 +69,15 @@ a {
     cursor: pointer;
 }
 
-#about {
-    font-family: 'Prompt';
-    .inner {
-        font-weight: 200;
-    }
+.details {
+    font-weight: 200;
+    line-height: 2.5rem;
+    text-indent: 2.5rem;
+    text-align: justify;
+}
+
+.ac-detail {
+    line-height: 2.23rem;
 }
 </style>
 

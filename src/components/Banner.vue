@@ -5,10 +5,7 @@
                 <img :src="configs.welcome_logo" v-if="configs.welcome_logo" alt="wanchaloem laoket">
             </div>
             <h2>{{ configs.welcome_head }}</h2>
-            <p class="thaifont">
-                {{ configs.welcome_detail }}
-                <a :href="Url.About">ข้อมูลเพิ่มเติม</a>
-            </p>
+            <p v-html="configs.welcome_detail"></p>
         </div>
     </section>
 </template>
@@ -31,10 +28,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#banner {
+    .inner h1 {
+        font-family: "Raleway", "Prompt", Helvetica, sans-serif;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     #banner .logo img {
         width: 150px;
         height: 150px;
+        margin-bottom: 25px;
     }
 }
 </style>
